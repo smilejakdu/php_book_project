@@ -18,9 +18,8 @@ if(isset($_POST["date"])){
 
 		// $changed_model_count = "SELECT COUNT(model_name) FROM sk_db";
 		$total_record = mysqli_num_rows($sql);
-		echo "전체 변경 수 :".$total_record;
 		$result .='
-		<p class="btn btn-danger">공시지원금 변동 '.$total_record.'건</p>
+		<p class="btn btn-outline-danger">공시지원금 변동 '.$total_record.'건</p>
 		<br>
 		';
 
