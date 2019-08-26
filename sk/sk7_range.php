@@ -1,11 +1,15 @@
 <?php
 // Range.php
 if(isset($_POST["date"])){
-		$conn = mysqli_connect("localhost", "root", "root", "phone_db");
+		$servername = "localhost";
+		$username = "root";
+		$password = "root";
+		$dbname = "phone_db";
+		$conn = mysqli_connect($servername, $username, $password, $dbname);
 		$result = '';
 		$result.='
 		<br>
-		<p class="flexbox wrapper">'.$_POST["date"].'변경모델<p>';
+		<p class="flexbox wrapper btn btn-info">'.$_POST["date"].' 변경모델<p>';
 
 		$query = "SELECT DISTINCT model_name FROM sk_db";
 		$sql = mysqli_query($conn, $query);
@@ -13,11 +17,11 @@ if(isset($_POST["date"])){
 
 		while($row = mysqli_fetch_array($sql)){
 			$result .='
-			<button type="button" class="button4">'.$row["model_name"].'</button>';
+			<button type="button" class="button3">'.$row["model_name"].'</button>';
 			$t ++ ; 
 			if($t % 4 == 0){
 				$result .='
-			<button type="button" class="button4">'.$row["model_name"].'</button>
+			<button type="button" class="button3">'.$row["model_name"].'</button>
 			<br>';
 
 			}
