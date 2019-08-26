@@ -4,8 +4,19 @@ if(isset($_POST["date"])){
 		$conn = mysqli_connect("localhost", "root", "root", "phone_db");
 		$result = '';
 		$result.='
-		<p class="flexbox wrapper" >'.$_POST["date"].'변경모델<p>
-		';
+		<p class="flexbox wrapper">'.$_POST["date"].'변경모델<p>';
+
+		$query = "SELECT DISTINCT model_name FROM sk_db";
+		$sql = mysqli_query($conn, $query);
+
+		while($row = mysqli_fetch_array($sql)){
+			$result .='
+			<div class="flexbox wrapper">
+			<td>'.$row["model_name"].'</td>
+			</div>
+			';
+		}
+
         $result .='
         <div class="flexbox wrapper">
         <div class="button">단말기 명</div>
@@ -15,6 +26,7 @@ if(isset($_POST["date"])){
         <div class="button">공시지원금</div>
         <div class="button">공시일자</div>
 		</div>';
+
 		$query = "SELECT * FROM sk_db WHERE support_date ='".$_POST["date"]."'";
         $sql = mysqli_query($conn, $query);
         if(mysqli_num_rows($sql) > 0){
