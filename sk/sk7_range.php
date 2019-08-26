@@ -9,11 +9,18 @@ if(isset($_POST["date"])){
 
 		$query = "SELECT DISTINCT model_name FROM sk_db";
 		$sql = mysqli_query($conn, $query);
+		$t=0;
 
 		while($row = mysqli_fetch_array($sql)){
 			$result .='
+			<button type="button" class="button4">'.$row["model_name"].'</button>';
+			$t ++ ; 
+			if($t % 4 == 0){
+				$result .='
 			<button type="button" class="button4">'.$row["model_name"].'</button>
-			';
+			<br>';
+
+			}
 		}
 
         $result .='
