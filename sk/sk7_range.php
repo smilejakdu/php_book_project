@@ -4,6 +4,7 @@ if(isset($_POST["date"])){
 		$conn = mysqli_connect("localhost", "root", "root", "phone_db");
 		$result = '';
 		$result.='
+		<br>
 		<p class="flexbox wrapper">'.$_POST["date"].'변경모델<p>';
 
 		$query = "SELECT DISTINCT model_name FROM sk_db";
@@ -11,9 +12,7 @@ if(isset($_POST["date"])){
 
 		while($row = mysqli_fetch_array($sql)){
 			$result .='
-			<div class="flexbox wrapper">
 			<button type="button" class="button4">'.$row["model_name"].'</button>
-			</div>
 			';
 		}
 
