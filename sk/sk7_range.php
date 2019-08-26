@@ -10,20 +10,29 @@ if(isset($_POST["date"])){
 		$result.='
 		<br>
 		<p class="flexbox wrapper btn btn-info">'.$_POST["date"].' 변경모델<p>';
+		
 
 		$query = "SELECT DISTINCT model_name FROM sk_db";
 		$sql = mysqli_query($conn, $query);
 		$t=0;
 
-		while($row = mysqli_fetch_array($sql)){
-			$result .='
-			<button type="button" class="button3">'.$row["model_name"].'</button>';
-			$t ++ ; 
-			if($t % 4 == 0){
-				$result .='
-			<button type="button" class="button3">'.$row["model_name"].'</button>
-			<br>';
+		// $changed_model_count = "SELECT COUNT(model_name) FROM sk_db";
+		$total_record = mysqli_num_rows($sql);
+		echo "전체 변경 수 :".$total_record;
+		$result .='
+		<p class="btn btn-danger">공시지원금 변동 '.$total_record.'건</p>
+		<br>
+		';
 
+		while($row = mysqli_fetch_array($sql)){
+			$t ++; 
+			if($t % 5 == 0){
+				$result .='
+				<button type="button" class="button3">'.$row["model_name"].'</button>
+				<br>';
+			}else {
+				$result .='
+				<button type="button" class="button3">'.$row["model_name"].'</button>';
 			}
 		}
 

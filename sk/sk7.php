@@ -132,9 +132,8 @@ $(document).ready(function(){
     </div>
 
     <?php
-      while( $row = mysqli_fetch_array( $result )){
+      while( $row = mysqli_fetch_array($result)){
     ?>
-    <!-- here -->
     <table>
     <tr class="flexbox wrapper">
       <td><?php echo $row['machine_name'];?></td>
