@@ -3,7 +3,8 @@ error_reporting(E_ALL);
 ini_set("display_errors",1);
 ini_set("memory_limit","-1");
 
-include_once("simple_html_dom.php");
+include_once("./simple_html_dom.php");
+
 
 function get_html($url){
    $ch = curl_init();
@@ -14,6 +15,9 @@ function get_html($url){
    curl_setopt($ch, CURLOPT_HEADER, false);
    curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+   // windows 에서 크롤링 할려니깐 에러가 나서 밑에 두줄을 넣으니 오류가 사라짐
+   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+   curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
    $html = curl_exec($ch);
    curl_close($ch);
 
@@ -22,7 +26,7 @@ function get_html($url){
 
 $spage=1;
 //$epage=147; //최대 페이지 수
-$epage=2;
+$epage=101;
 
 $servername = "localhost";
 $username = "root";
@@ -35,7 +39,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
-
 
 for($i=$spage; $i<=$epage; $i++){
    $html=get_html("https://www.sk7mobile.com/util/support/publicFundLte.do?orderCheck=&pageIndex={$i}&searchCondition=0&searchKeyword=");
@@ -70,25 +73,26 @@ for($i=$spage; $i<=$epage; $i++){
       // echo "약정 12개월 판매가 : ".$item->find('td',5)->plaintext;
       $plaintext5 = $item ->find('td',5)->plaintext;
       $plaintext5 = str_replace("원", "", $plaintext5);
-
-      // echo "약정 24개월 지원금 : ".$item->find('td',6)->plaintext;
+        // echo "약정 24개월 지원금 : ".$item->find('td',6)->plaintext;
       $plaintext6 = $item ->find('td',6)->plaintext;
+      $plaintext6 = str_replace("원", "", $plaintext6);
 
       // echo "약정 24개월 판매가 : ".$item->find('td',7)->plaintext;
       $plaintext7 = $item ->find('td',7)->plaintext;
 
       // echo "공시일자 : ".$item->find('td',8)->plaintext;
       $plaintext8 = $item ->find('td',8)->plaintext;
-      echo $plaintext0 ,$plaintext1 , $plaintext2 , $plaintext3 , $plaintext4 , $plaintext8 ;
+      // echo $plaintext0 ,$plaintext1 , $plaintext2 , $plaintext3 , $plaintext4 , $plaintext8 ;
       echo "<br/>";
       $sql = "INSERT INTO sk_db (machine_name, model_name, plan_money,shipment_money,disclosure_money,support_date)
         VALUES ('$plaintext0', '$plaintext1', '$plaintext2','$plaintext3','$plaintext6','$plaintext8')";
 
         if ($conn->query($sql) === TRUE) {
-            // echo "New record created successfully";
+             echo "레코드 insert 성공";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
    }
 }
 ?>
+

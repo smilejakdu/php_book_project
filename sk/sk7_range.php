@@ -1,12 +1,11 @@
 <?php
 // Range.php
 if(isset($_POST["date"])){
-        $conn = mysqli_connect("localhost", "root", "root", "phone_db");
+		$conn = mysqli_connect("localhost", "root", "root", "phone_db");
 		$result = '';
 		$result.='
-		<p>'.$_POST["date"].'변동사항<p>
+		<p class="flexbox wrapper" >'.$_POST["date"].'변경모델<p>
 		';
-
         $result .='
         <div class="flexbox wrapper">
         <div class="button">단말기 명</div>
