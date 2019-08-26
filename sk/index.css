@@ -93,7 +93,6 @@
     font-size: 16px;
     color: #000000;
     font-weight: 500;
-    font-size: 15px;
     padding: 3px 16px;
     border-radius: 10px;
   }
@@ -111,6 +110,19 @@
     padding: 3px 16px;
     border-radius: 10px;
     text-align: center;
+  }
+
+  .button4 {
+    border: 1px solid #1e83be;
+    background-color: #ffffff;
+    width: 150px;
+    height: 30px;
+    margin: 12px;
+    font-size: 11px;
+    color: #000000;
+    font-weight: 500;
+    padding: 3px 16px;
+    border-radius: 10px;
   }
 
   .btn_group button {

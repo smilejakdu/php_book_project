@@ -12,7 +12,7 @@ if(isset($_POST["date"])){
 		while($row = mysqli_fetch_array($sql)){
 			$result .='
 			<div class="flexbox wrapper">
-			<td>'.$row["model_name"].'</td>
+			<button type="button" class="button4">'.$row["model_name"].'</button>
 			</div>
 			';
 		}
