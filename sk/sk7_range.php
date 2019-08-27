@@ -1,3 +1,11 @@
+<script>
+$(document).on("click","button",function() {
+    // id="change_name"
+	alert("test 입니다..");
+});
+
+</script>
+
 <?php
 // Range.php
 if(isset($_POST["date"])){
@@ -25,11 +33,12 @@ if(isset($_POST["date"])){
 			$t ++; 
 			if($t % 5 == 0){
 				$result .='
-				<button type="button" class="btn btn-outline-info">'.$row["model_name"].'</button>
+				<button type="button" id="change_name" class="btn btn-outline-info">'.$row["model_name"].'</button>
 				<br>';
 			}else {
 				$result .='
-				<button type="button" class="btn btn-outline-info">'.$row["model_name"].'</button>';
+				<button type="button" id="change_name" class="btn btn-outline-info">'.$row["model_name"].'</button>
+				';
 			}
 		}
 

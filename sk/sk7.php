@@ -13,6 +13,7 @@ $result = mysqli_query( $conn, $sql );
     <meta name="viewport" content="width=device-width, initial-scale=1.0 , user-scalable=no">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./index.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -24,10 +25,7 @@ $result = mysqli_query( $conn, $sql );
 
 <body>
 
-  <div class="flexbox center wrapper">
-
-  </div>
-
+  <br>
   <div class="flexbox center wrapper">
     <h3><span style="color:#01A9DB">공시지원금 변동현황</span></h3>
   </div>
@@ -65,8 +63,6 @@ $(document).ready(function(){
         $('#range').click(function(){
                 var date = $('#date').val();
                 if(date != ''){
-
-                            alert(date);
                         $.ajax({
                                 url:"sk7_range.php",
                                 method:"POST",
@@ -116,6 +112,18 @@ $(document).ready(function(){
     <button type="submit" class="button2">헬로모바일(KT)</button>
 </div>
 <br>
+
+<script>
+$(document).ready(function() {
+    // id="change_name"
+
+    $("#change_name").on("click","button",function(){
+        alert("안녕하세요.");
+    });
+});
+
+</script>
+
 
 <hr width="800" class="flexbox wrapper"/>
 <center id="purchase_order">
