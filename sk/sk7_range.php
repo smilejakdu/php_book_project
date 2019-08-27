@@ -1,11 +1,3 @@
-<script>
-$(document).on("click","button",function() {
-    // id="change_name"
-	alert("test 입니다..");
-});
-
-</script>
-
 <?php
 // Range.php
 if(isset($_POST["date"])){
@@ -44,12 +36,12 @@ if(isset($_POST["date"])){
 
         $result .='
         <div class="flexbox wrapper">
-        <div class="button">단말기 명</div>
-        <div class="button">모델 명</div>
-        <div class="button">요금제</div>
-        <div class="button">출고가</div>
-        <div class="button">공시지원금</div>
-        <div class="button">공시일자</div>
+			<div class="button">단말기 명</div>
+			<div class="button">모델 명</div>
+			<div class="button">요금제</div>
+			<div class="button">출고가</div>
+			<div class="button">공시지원금</div>
+			<div class="button">공시일자</div>
 		</div>';
 
 		$query = "SELECT * FROM sk_db WHERE support_date ='".$_POST["date"]."' ORDER BY model_name";

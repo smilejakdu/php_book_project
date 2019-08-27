@@ -80,15 +80,25 @@ $(document).ready(function(){
         });
 });
 
+$(document).on("click","button",function() {
+	// 이렇게하면 button element 를 클릭했을때 
+	// 해당하는 model_name 이 보이게 된다 
+	var changed_model_name =$(this).text();
+	alert(changed_model_name);
+        $.ajax({
+            url:"model_click.php",
+            method:"POST",
+            data:{changed_model_name:changed_model_name},
+            success:function(data)
+            {
+                $('#purchase_order').html(data);
+            }
+        });
+});
+
 </script>
 
 <br>
-
-<!-- <div class="flexbox wrapper center">
-    <h3>
-        <p style="color:#FF0040"> 공시지원금 변동 5건 있습니다</p>
-    </h3>
-</div> -->
 
 <br>
 <div class="flexbox wrapper center">
@@ -112,18 +122,6 @@ $(document).ready(function(){
     <button type="submit" class="button2">헬로모바일(KT)</button>
 </div>
 <br>
-
-<script>
-$(document).ready(function() {
-    // id="change_name"
-
-    $("#change_name").on("click","button",function(){
-        alert("안녕하세요.");
-    });
-});
-
-</script>
-
 
 <hr width="800" class="flexbox wrapper"/>
 <center id="purchase_order">
