@@ -25,11 +25,11 @@ if(isset($_POST["date"])){
 			$t ++; 
 			if($t % 5 == 0){
 				$result .='
-				<button type="button" class="button3">'.$row["model_name"].'</button>
+				<button type="button" class="btn btn-outline-info">' .$row["model_name"].'</button>
 				<br>';
 			}else {
 				$result .='
-				<button type="button" class="button3">'.$row["model_name"].'</button>';
+				<button type="button" class="btn btn-outline-info">' .$row["model_name"].'</button>';
 			}
 		}
 
