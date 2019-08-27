@@ -12,11 +12,9 @@ if(isset($_POST["date"])){
 		<p class="flexbox wrapper btn btn-info">'.$_POST["date"].' 변경모델<p>';
 		
 
-		$query = "SELECT DISTINCT model_name FROM sk_db";
+		$query = "SELECT DISTINCT model_name FROM sk_db WHERE support_date ='".$_POST["date"]."'";
 		$sql = mysqli_query($conn, $query);
 		$t=0;
-
-		// $changed_model_count = "SELECT COUNT(model_name) FROM sk_db";
 		$total_record = mysqli_num_rows($sql);
 		$result .='
 		<p class="btn btn-outline-danger">공시지원금 변동 '.$total_record.'건</p>

@@ -46,7 +46,7 @@ $timestamp="".date('Y-m-d', $timestamp);
         <button type="submit" class="item3">전일</button>
         <span> sk 7 Mobile / 공시지원금 변동현황</span>
         <input type="text" name="date" id="date" class="date_button" placeholder="날짜선택"/>
-        <input type="button" name="range" id="range" value="확인" class="btn btn-primary"/>
+        <input type="button" name="range" id="range" value="확인" class="item3"/>
         <br>
     </div>
 </center>
