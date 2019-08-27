@@ -118,9 +118,6 @@ $(document).ready(function(){
 <br>
 
 <hr width="800" class="flexbox wrapper"/>
-<div class="flexbox wrapper">
-</div>
-
 <center id="purchase_order">
     <div class="flexbox wrapper" >
         <div class="button">단말기 명</div>

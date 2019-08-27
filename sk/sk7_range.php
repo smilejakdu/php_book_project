@@ -25,11 +25,11 @@ if(isset($_POST["date"])){
 			$t ++; 
 			if($t % 5 == 0){
 				$result .='
-				<button type="button" class="btn btn-outline-info">' .$row["model_name"].'</button>
+				<button type="button" class="btn btn-outline-info">'.$row["model_name"].'</button>
 				<br>';
 			}else {
 				$result .='
-				<button type="button" class="btn btn-outline-info">' .$row["model_name"].'</button>';
+				<button type="button" class="btn btn-outline-info">'.$row["model_name"].'</button>';
 			}
 		}
 
@@ -43,7 +43,7 @@ if(isset($_POST["date"])){
         <div class="button">공시일자</div>
 		</div>';
 
-		$query = "SELECT * FROM sk_db WHERE support_date ='".$_POST["date"]."'";
+		$query = "SELECT * FROM sk_db WHERE support_date ='".$_POST["date"]."' ORDER BY model_name";
         $sql = mysqli_query($conn, $query);
         if(mysqli_num_rows($sql) > 0){
 		while($row = mysqli_fetch_array($sql)){
