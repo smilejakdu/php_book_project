@@ -26,7 +26,7 @@ function get_html($url){
 
 $spage=1;
 //$epage=147; //최대 페이지 수
-$epage=101;
+$epage=2; // 처음에 101 페이지로 연습 
 
 $servername = "localhost";
 $username = "root";
@@ -39,6 +39,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
+$sql = "truncate table sk_db;";
+mysqli_query($conn,$sql);
 
 for($i=$spage; $i<=$epage; $i++){
    $html=get_html("https://www.sk7mobile.com/util/support/publicFundLte.do?orderCheck=&pageIndex={$i}&searchCondition=0&searchKeyword=");
