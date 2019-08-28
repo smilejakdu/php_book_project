@@ -60,7 +60,7 @@ if(isset( $_POST["changed_model_name"] , $_POST["date"]  )){
             <div class="button">공시일자</div>
 		</div>';
 
-		$query = "SELECT * FROM sk_db WHERE model_name ='".$_POST["changed_model_name"]."' ORDER BY num";
+		$query = "SELECT * FROM sk_db WHERE model_name ='".$_POST["changed_model_name"]."' ORDER BY plan_money";
         $sql = mysqli_query($conn, $query);
         if(mysqli_num_rows($sql) > 0){
 		while($row = mysqli_fetch_array($sql)){
