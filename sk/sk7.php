@@ -52,6 +52,7 @@ $timestamp="".date('Y-m-d', $timestamp);
 <script>
 
 $(document).ready(function(){
+
         $.datepicker.setDefaults({
                 dateFormat: 'yy-mm-dd'
         });
@@ -69,7 +70,7 @@ $(document).ready(function(){
                                 data:{date:date},
                                 success:function(data)
                                 {
-                                        $('#purchase_order').html(data);
+                                    $('#purchase_order').html(data);
                                 }
                         });
                 }
@@ -80,12 +81,11 @@ $(document).ready(function(){
         });
 });
 
-$(document).on("click","button",function() {
+$(document).on("click","#change_name",function() {
 	// 이렇게하면 button element 를 클릭했을때 
 	// 해당하는 model_name 이 보이게 된다 
 	var changed_model_name =$(this).text();
     var date = $('#date').val();
-	alert(changed_model_name);
     if(date !=''){
         $.ajax({
             url:"model_click.php",

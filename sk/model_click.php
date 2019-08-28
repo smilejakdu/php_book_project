@@ -23,13 +23,30 @@ if(isset( $_POST["changed_model_name"] , $_POST["date"]  )){
 		while($row = mysqli_fetch_array($sql)){
 			$t ++; 
 			if($t % 5 == 0){
-				$result .='
-				<button type="button" id="change_name" class="btn btn-outline-info">'.$row["model_name"].'</button>
-				<br>';
-			}else {
-				$result .='
-				<button type="button" id="change_name" class="btn btn-outline-info">'.$row["model_name"].'</button>
-				';
+				if($_POST["changed_model_name"] == $row["model_name"]){
+
+					$result .='
+					<button type="button" id="change_name" class="btn btn-info">'.$row["model_name"].'</button>
+					<br>';
+				}else {
+					$result .='
+					<button type="button" id="change_name" class="btn btn-outline-info">'.$row["model_name"].'</button>
+					<br>';
+				}
+
+			}
+			else {
+
+				if($_POST["changed_model_name"] == $row["model_name"]){
+					$result .='
+					<button type="button" id="change_name" class="btn btn-info">'.$row["model_name"].'</button>
+					';
+				}else {
+					$result .='
+					<button type="button" id="change_name" class="btn btn-outline-info">'.$row["model_name"].'</button>
+					';
+				}
+
 			}
 		}
 
