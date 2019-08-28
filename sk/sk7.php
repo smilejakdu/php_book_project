@@ -73,10 +73,10 @@ $(document).ready(function(){
                                 }
                         });
                 }
-                else
-                {
-                        alert("날짜를 선택하세요");
-                }
+                // else
+                // {
+                //         alert("날짜를 선택하세요");
+                // }
         });
 });
 
@@ -84,16 +84,19 @@ $(document).on("click","button",function() {
 	// 이렇게하면 button element 를 클릭했을때 
 	// 해당하는 model_name 이 보이게 된다 
 	var changed_model_name =$(this).text();
+    var date = $('#date').val();
 	alert(changed_model_name);
+    if(date !=''){
         $.ajax({
             url:"model_click.php",
             method:"POST",
-            data:{changed_model_name:changed_model_name},
+            data:{changed_model_name:changed_model_name,date:date},
             success:function(data)
             {
                 $('#purchase_order').html(data);
             }
         });
+    }
 });
 
 </script>
@@ -137,7 +140,7 @@ $(document).on("click","button",function() {
     <?php
       while( $row = mysqli_fetch_array($result)){
     ?>
-    <table>
+<table>
     <tr class="flexbox wrapper">
       <td><?php echo $row['machine_name'];?></td>
       <td><?php echo $row['model_name'];?></td>
@@ -151,7 +154,7 @@ $(document).on("click","button",function() {
 
     <?php
   }
-  ?>
+    ?>
 
   </table>
 </center>

@@ -1,12 +1,38 @@
 <?php
 // Range.php
-if(isset($_POST["changed_model_name"])){
+if(isset( $_POST["changed_model_name"] , $_POST["date"]  )){
 		$servername = "localhost";
 		$username = "root";
 		$password = "root";
 		$dbname = "phone_db";
 		$conn = mysqli_connect($servername, $username, $password, $dbname);
-        $result = '';
+		$result = '';
+		$result.='
+		<br>
+		<p class="flexbox wrapper btn btn-info">'.$_POST["date"].' 변경모델<p>';
+
+		$query = "SELECT DISTINCT model_name FROM sk_db WHERE support_date ='".$_POST["date"]."'";
+		$sql = mysqli_query($conn, $query);
+		$t=0;
+		$total_record = mysqli_num_rows($sql);
+		$result .='
+		<p class="btn btn-outline-danger">공시지원금 변동 '.$total_record.'건</p>
+		<br>
+		';
+
+		while($row = mysqli_fetch_array($sql)){
+			$t ++; 
+			if($t % 5 == 0){
+				$result .='
+				<button type="button" id="change_name" class="btn btn-outline-info">'.$row["model_name"].'</button>
+				<br>';
+			}else {
+				$result .='
+				<button type="button" id="change_name" class="btn btn-outline-info">'.$row["model_name"].'</button>
+				';
+			}
+		}
+
         $result .='
         <div class="flexbox wrapper">
             <div class="button">단말기 명</div>
