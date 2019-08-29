@@ -4,9 +4,6 @@ $username = "root";
 $password = "root";
 $dbname = "phone_db";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// $sql = "SELECT * FROM sk_db ORDER BY machine_name;";
-// $result = mysqli_query( $conn, $sql );
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +16,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./index.css" type="text/css">
+    <link rel="stylesheet" href="../index.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -37,9 +34,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 <br>
 
 <?php
-
-    $timestamp = strtotime("Now");
-    $timestamp="".date('Y-m-d', $timestamp);
+    date_default_timezone_set('Asia/Seoul');
+    $today = strtotime("Now");
+    $today="".date('Y-m-d', $today);
 
 ?>
 
@@ -47,7 +44,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     <div class="flexbox2 wrapper">
         <button type="submit" class="item3">전일</button>
         <span> U+ 알뜰 Mobile / 공시지원금 변동현황</span>
-        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $timestamp ?>"/>
+        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $today ?>"/>
         <input type="button" name="range" id="range" value="확인" class="item3"/>
         <br>
     </div>
@@ -69,7 +66,7 @@ $(document).ready(function(){
                 var date = $('#date').val();
                 if(date != ''){
                         $.ajax({
-                                url:"sk7_range.php",
+                                url:"lg_mobile_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -92,7 +89,7 @@ $(document).on("click","#change_name",function() {
     var date = $('#date').val();
     if(date !=''){
         $.ajax({
-            url:"model_click.php",
+            url:"lg_mobile_model_click.php",
             method:"POST",
             data:{changed_model_name:changed_model_name,date:date},
             success:function(data)
@@ -123,7 +120,7 @@ $(document).on("click","#change_name",function() {
 </div>
 <div class="flexbox wrapper">
     <button type="submit" class="button">U+알뜰모바일</button>
-    <a><button type="submit" class="button2">SK 7모바일</button></a>
+    <a href ="../sk/sk7.php"><button type="submit" class="button2">SK 7모바일</button></a>
     <button type="submit" class="button2">KT M모바일</button>
     <button type="submit" class="button2">헬로모바일(SKT)</button>
     <button type="submit" class="button2">헬로모바일(KT)</button>
@@ -133,10 +130,10 @@ $(document).on("click","#change_name",function() {
 <hr width="800" class="flexbox wrapper"/>
 <center id="purchase_order">
 <br>
-<p class="flexbox wrapper btn btn-info"><?php echo $timestamp ?> 변경모델</p>
+<p class="flexbox wrapper btn btn-info"><?php echo $today ?> 변경모델</p>
 
 <?php
-    $query = "SELECT DISTINCT model_name FROM sk_db WHERE support_date=$timestamp";
+    $query = "SELECT DISTINCT model_name FROM lg_db WHERE support_date=$today";
     $sql = mysqli_query($conn , $query);
     $t=0;
     $total_record = mysqli_num_rows($sql);
@@ -172,7 +169,7 @@ $(document).on("click","#change_name",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM sk_db WHERE support_date=$timestamp ORDER BY model_name";
+      $query = "SELECT * FROM lg_db WHERE support_date=$today ORDER BY model_name";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($result)){
