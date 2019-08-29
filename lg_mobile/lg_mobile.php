@@ -46,7 +46,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 <center>
     <div class="flexbox2 wrapper">
         <button type="submit" class="item3">전일</button>
-        <span> sk 7 Mobile / 공시지원금 변동현황</span>
+        <span> U+ 알뜰 Mobile / 공시지원금 변동현황</span>
         <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $timestamp ?>"/>
         <input type="button" name="range" id="range" value="확인" class="item3"/>
         <br>
@@ -122,8 +122,8 @@ $(document).on("click","#change_name",function() {
 
 </div>
 <div class="flexbox wrapper">
-    <a href=""><button type="submit" class="button2">U+알뜰모바일</button></a>
-    <button type="submit" class="button">SK 7모바일</button>
+    <button type="submit" class="button">U+알뜰모바일</button>
+    <a><button type="submit" class="button2">SK 7모바일</button></a>
     <button type="submit" class="button2">KT M모바일</button>
     <button type="submit" class="button2">헬로모바일(SKT)</button>
     <button type="submit" class="button2">헬로모바일(KT)</button>

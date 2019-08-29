@@ -10,8 +10,6 @@ if(isset($_POST["date"])){
 		$result.='
 		<br>
 		<p class="flexbox wrapper btn btn-info">'.$_POST["date"].' 변경모델<p>';
-		
-
 		$query = "SELECT DISTINCT model_name FROM sk_db WHERE support_date ='".$_POST["date"]."'";
 		$sql = mysqli_query($conn, $query);
 		$t=0;

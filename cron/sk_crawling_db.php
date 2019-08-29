@@ -14,19 +14,22 @@ function get_html($url){
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
    curl_setopt($ch, CURLOPT_HEADER, false);
    curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+   // curl_setopt($ch, CURLOPT_USERAGENT, "Chrome"); 
+   // aws 에서 crontab 돌릴때 안되서 "Chrome" 하니깐 동작함 
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
    // windows 에서 크롤링 할려니깐 에러가 나서 밑에 두줄을 넣으니 오류가 사라짐
-   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
-   curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
+   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+   curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
    $html = curl_exec($ch);
    curl_close($ch);
 
    return $html;
 }
 
+// 처음 페이지 
 $spage=1;
-//$epage=147; //최대 페이지 수
-$epage=2; // 처음에 101 페이지로 연습 
+ //최대 페이지 수 154 
+$epage=154; 
 
 $servername = "localhost";
 $username = "root";
@@ -96,5 +99,5 @@ for($i=$spage; $i<=$epage; $i++){
         }
    }
 }
-?>
 
+?>
