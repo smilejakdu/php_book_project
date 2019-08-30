@@ -13,7 +13,6 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 <html lang="ko">
 
 <head>
-
     <title>U and Soft and xeronote </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 , user-scalable=no">
@@ -26,7 +25,6 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
-
 </head>
 
 <body>
@@ -40,17 +38,16 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <?php
     date_default_timezone_set('Asia/Seoul');
-    $today = strtotime("Now");
-    $today="".date('Y-m-d', $today);
-    
+    $date = strtotime("Now");
+    $date="".date('Y-m-d', $date);
     // $date="2019-08-01";
 ?>
 
 <center>
     <div class="flexbox2 wrapper">
-        <button type="submit" class="item3"id="yesterday">전일</button>
+        <button type="submit" class="item3">전일</button>
         <span> sk 7 Mobile / 공시지원금 변동현황</span>
-        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $today ?>"/>
+        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $date ?>"/>
         <input type="button" name="range" id="range" value="확인" class="item3"/>
         <br>
     </div>
@@ -95,7 +92,7 @@ $(document).on("click","#change_name",function() {
     var date = $('#date').val();
     if(date !=''){
         $.ajax({
-            url:"model_click.php",
+            url:"sk7_model_click.php",
             method:"POST",
             data:{changed_model_name:changed_model_name,date:date},
             success:function(data)
@@ -106,15 +103,6 @@ $(document).on("click","#change_name",function() {
     }
 });
 
-
-$(document).on("click","#yesterday",function(){
-    
-    var yesterday = '<?=$today?>';
-    yesterday = yesterday.replace(/-/gi,"");
-    yesterday = Number(yesterday);
-    alert(yesterday);
-
-});
 </script>
 
 <br>
@@ -145,7 +133,7 @@ $(document).on("click","#yesterday",function(){
 <hr width="800" class="flexbox wrapper"/>
 <center id="purchase_order">
 <br>
-<p class="flexbox wrapper btn btn-info"><?php echo $today ?> 변경모델</p>
+<p class="flexbox wrapper btn btn-info"><?php echo $date ?> 변경모델</p>
 
 <?php
     $query = "SELECT DISTINCT model_name FROM sk_db WHERE support_date='$date'";
@@ -174,6 +162,7 @@ $(document).on("click","#yesterday",function(){
         }
     }
 ?>
+
     <div class="flexbox wrapper" >
         <div class="button">단말기 명</div>
         <div class="button">모델 명</div>
@@ -184,7 +173,7 @@ $(document).on("click","#yesterday",function(){
     </div>
 
     <?php
-      $query = "SELECT * FROM sk_db WHERE support_date='$today' ORDER BY model_name";
+      $query = "SELECT * FROM sk_db WHERE support_date='$date' ORDER BY model_name";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($sql)){
