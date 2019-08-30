@@ -42,6 +42,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     date_default_timezone_set('Asia/Seoul');
     $today = strtotime("Now");
     $today="".date('Y-m-d', $today);
+    
     // $date="2019-08-01";
 ?>
 
@@ -109,6 +110,8 @@ $(document).on("click","#change_name",function() {
 $(document).on("click","#yesterday",function(){
     
     var yesterday = '<?=$today?>';
+    yesterday = yesterday.replace(/-/gi,"");
+    yesterday = Number(yesterday);
     alert(yesterday);
 
 });
