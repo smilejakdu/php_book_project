@@ -80,7 +80,10 @@ for($i=$spage; $i<=$epage; $i++){
 
       // echo "공시일자 : ".$item->find('td',5)->plaintext;
       $plaintext5 = $item ->find('td',5)->plaintext;
+      $plaintext5 = trim($plaintext5);
       $plaintext5 = str_replace(".", "-", $plaintext5);
+
+      echo $plaintext0 , $plaintext1 , $plaintext2 , $plaintext3 , $plaintext4, $plaintext5 ;
 
       $sql = "INSERT INTO lg_db (machine_name, model_name, plan_money,shipment_money,disclosure_money,support_date)
         VALUES ('$plaintext0', '$plaintext1', '$plaintext2','$plaintext3','$plaintext4','$plaintext5')";
