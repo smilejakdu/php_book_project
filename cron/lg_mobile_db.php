@@ -42,18 +42,18 @@ die("Connection failed: " . $conn->connect_error);
 $sql = "truncate table lg_db";
 mysqli_query($conn,$sql);
 
-$sub_url =array("LPZ0002240", "LPZ0002241", "LPZ0002242", "LPZ0002243",
-           "LPZ0015282", "LPZ0015284", "LPZ0015285", "LPZ0001993",
-           "LPZ0015024", "LPZ0000201","LPZ0015034", "LPZ0015027",
-           "LPZ0015032","LPZ0002255", "LPZ0001832", "LPZ0001833",
-           "LPZ0001789");
 
-$date_list = array("데이터·통화 마음껏" , "데이터넉넉히(15GB+/100분)" , "통화기본·데이터6.6GB",
-                     "통화많이(4.5GB/3,000분)" , "통화많이(2.5GB/3,000분)" , "통화많이(1.5GB/3,000분)",
-                     "최강 가성비(10GB/180분)" , "최강 가성비(6GB/200분)" , "최강 가성비(3.5GB/200분)",
-                     "최강 가성비(1.5GB/120분)" , "알뜰한(2GB/200분)" , "알뜰한(1GB/120분)",
-                     "알뜰한(300MB/90분)","청소년 맘편히" , "청소년 34000링" ,
-                      "청소년 28000링" , "복지 LTE 28");
+$sub_url =array("LPZ0000201","LPZ0015024","LPZ0001993","LPZ0015285",
+                "LPZ0015284","LPZ0015282","LPZ0015588","LPZ0015585",
+                "LPZ0015586","LPZ0015584","LPZ0015032","LPZ0015027",
+                "LPZ0015034","LPZ0002255","LPZ0001833","LPZ0001832",
+                "LPZ0001789");
+
+$date_list = array("데이터·통화 마음껏" , "데이터넉넉히(15GB+/100분)" , "통화기본·데이터6.6GB", "통화많이(4.5GB/3,000분)" ,
+                      "통화많이(2.5GB/3,000분)" , "통화많이(1.5GB/3,000분)","최강 가성비(10GB/180분)" , "최강 가성비(6GB/200분)" ,
+                       "최강 가성비(3.5GB/200분)","최강 가성비(1.5GB/120분)" , "알뜰한(2GB/200분)" , "알뜰한(1GB/120분)",
+                     "알뜰한(300MB/90분)","청소년 맘편히" , "청소년 34000링" , "청소년 28000링" ,
+                      "복지 LTE 28");
 
 
 for($url_start=0; $url_start<count($sub_url); $url_start++){
@@ -99,7 +99,7 @@ for($url_start=0; $url_start<count($sub_url); $url_start++){
          $plaintext5 = trim($plaintext5);
          $plaintext5 = str_replace(".", "-", $plaintext5);
    
-         echo $plaintext0 , $plaintext1 , $date_list[$url_start] , $plaintext3 , $plaintext4, $plaintext5 ;
+         echo "$plaintext0 , $plaintext1 , $date_list[$url_start] , $plaintext3 , $plaintext4 , $plaintext5 ";
    
          $sql = "INSERT INTO lg_db (machine_name , model_name, plan_money  ,shipment_money, disclosure_money,support_date)
                            VALUES ('$plaintext0', '$plaintext1', '$date_list[$url_start]','$plaintext3','$plaintext4','$plaintext5')";

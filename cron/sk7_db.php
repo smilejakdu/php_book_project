@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set("display_errors",1);
 ini_set("memory_limit","-1");
-
+@set_time_limit(0);
 include_once("./simple_html_dom.php");
 
 
@@ -87,7 +87,7 @@ for($i=$spage; $i<=$epage; $i++){
 
       // echo "공시일자 : ".$item->find('td',8)->plaintext;
       $plaintext8 = $item ->find('td',8)->plaintext;
-      // echo $plaintext0 ,$plaintext1 , $plaintext2 , $plaintext3 , $plaintext4 , $plaintext8 ;
+      echo $plaintext0 ,$plaintext1 , $plaintext2 , $plaintext3 , $plaintext6 , $plaintext8 ;
       echo "<br/>";
       $sql = "INSERT INTO sk_db (machine_name, model_name, plan_money,shipment_money,disclosure_money,support_date)
         VALUES ('$plaintext0', '$plaintext1', '$plaintext2','$plaintext3','$plaintext6','$plaintext8')";

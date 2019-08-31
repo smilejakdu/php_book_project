@@ -37,7 +37,6 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     date_default_timezone_set('Asia/Seoul');
     $today = strtotime("Now");
     $today="".date('Y-m-d', $today);
-
 ?>
 
 <center>
@@ -55,6 +54,11 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 $(document).ready(function(){
 
         $.datepicker.setDefaults({
+                monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
+                monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
+                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
                 dateFormat: 'yy-mm-dd'
         });
         $(function(){
@@ -169,7 +173,7 @@ $(document).on("click","#change_name",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM lg_db WHERE support_date=$today ORDER BY model_name";
+      $query = "SELECT * FROM lg_db WHERE support_date=$today ORDER BY model_name , plan_money";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($result)){
