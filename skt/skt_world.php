@@ -38,8 +38,8 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <?php
     date_default_timezone_set('Asia/Seoul');
-    $date = strtotime("Now");
-    $date="".date('Y-m-d', $date);
+    $today = strtotime("Now");
+    $today="".date('Y-m-d', $today);
     // $date="2019-08-01";
 ?>
 
@@ -47,7 +47,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     <div class="flexbox2 wrapper">
         <button type="submit" class="item3">전일</button>
         <span> SKT World / 공시지원금 변동현황</span>
-        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $date ?>"/>
+        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $today ?>"/>
         <input type="button" name="range" id="range" value="확인" class="item3"/>
         <br>
     </div>
@@ -138,10 +138,10 @@ $(document).on("click","#change_name",function() {
 <hr width="800" class="flexbox wrapper"/>
 <center id="purchase_order">
 <br>
-<p class="flexbox wrapper btn btn-info"><?php echo $date ?> 변경모델</p>
+<p class="flexbox wrapper btn btn-info"><?php echo $today ?> 변경모델</p>
 
 <?php
-    $query = "SELECT DISTINCT machine_name FROM t_world WHERE support_date='$date'";
+    $query = "SELECT DISTINCT machine_name FROM t_world WHERE support_date='$today'";
     $sql = mysqli_query($conn , $query);
     $t=0;
     $total_record = mysqli_num_rows($sql);
@@ -151,7 +151,7 @@ $(document).on("click","#change_name",function() {
 <br>
 <br>
 <p class="btn btn-outline-danger">공시지원금 변동 <?php echo $total_record ?>건</p>
-<br>
+
 <?php 
     while($row = mysqli_fetch_array($sql)){
         $t ++ ;
@@ -178,7 +178,7 @@ $(document).on("click","#change_name",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM t_world WHERE support_date='$date' ORDER BY machine_name , plan_money";
+      $query = "SELECT * FROM t_world WHERE support_date='$today' ORDER BY machine_name , plan_money";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($sql)){

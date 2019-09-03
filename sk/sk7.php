@@ -151,7 +151,7 @@ $(document).on("click","#change_name",function() {
 <br>
 <br>
 <p class="btn btn-outline-danger">공시지원금 변동 <?php echo $total_record ?>건</p>
-<br>
+
 <?php 
     while($row = mysqli_fetch_array($sql)){
         $t ++ ;
