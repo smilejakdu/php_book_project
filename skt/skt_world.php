@@ -4,6 +4,9 @@ $username = "root";
 $password = "root";
 $dbname = "phone_db";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+// $sql = "SELECT * FROM sk_db ORDER BY machine_name;";
+// $result = mysqli_query( $conn, $sql );
 ?>
 
 <!DOCTYPE html>
@@ -35,15 +38,16 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <?php
     date_default_timezone_set('Asia/Seoul');
-    $today = strtotime("Now");
-    $today="".date('Y-m-d', $today);
+    $date = strtotime("Now");
+    $date="".date('Y-m-d', $date);
+    // $date="2019-08-01";
 ?>
 
 <center>
     <div class="flexbox2 wrapper">
         <button type="submit" class="item3">전일</button>
-        <span> U+ 알뜰 Mobile / 공시지원금 변동현황</span>
-        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $today ?>"/>
+        <span> SKT World / 공시지원금 변동현황</span>
+        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $date ?>"/>
         <input type="button" name="range" id="range" value="확인" class="item3"/>
         <br>
     </div>
@@ -70,7 +74,7 @@ $(document).ready(function(){
                 var date = $('#date').val();
                 if(date != ''){
                         $.ajax({
-                                url:"lg_mobile_range.php",
+                                url:"skt_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -89,13 +93,13 @@ $(document).ready(function(){
 $(document).on("click","#change_name",function() {
 	// 이렇게하면 button element 를 클릭했을때 
 	// 해당하는 model_name 이 보이게 된다 
-	var changed_model_name =$(this).text();
+	var changed_machine_name =$(this).text();
     var date = $('#date').val();
     if(date !=''){
         $.ajax({
-            url:"lg_mobile_model_click.php",
+            url:"skt_model_click.php",
             method:"POST",
-            data:{changed_model_name:changed_model_name,date:date},
+            data:{changed_machine_name:changed_machine_name,date:date},
             success:function(data)
             {
                 $('#purchase_order').html(data);
@@ -111,7 +115,7 @@ $(document).on("click","#change_name",function() {
 <br>
 <div class="flexbox wrapper center">
 
-    <a href="../skt/skt_world.php"><button type="submit" class="button2">SKT</button></a>
+    <button type="submit" class="button">SKT</button>
 
     <a href="http://localhost:8000/kt/">
         <button type="submit" class="button2">KT</button>
@@ -123,8 +127,8 @@ $(document).on("click","#change_name",function() {
 
 </div>
 <div class="flexbox wrapper">
-    <button type="submit" class="button">U+알뜰모바일</button>
-    <a href ="../sk/sk7.php"><button type="submit" class="button2">SK 7모바일</button></a>
+    <a href="../lg_mobile/lg_mobile.php"><button type="submit" class="button2">U+알뜰모바일</button></a>
+    <a href="../sk/sk7.php"><button type="submit" class="button2">SK 7모바일</button></a>
     <button type="submit" class="button2">KT M모바일</button>
     <button type="submit" class="button2">헬로모바일(SKT)</button>
     <button type="submit" class="button2">헬로모바일(KT)</button>
@@ -134,23 +138,24 @@ $(document).on("click","#change_name",function() {
 <hr width="800" class="flexbox wrapper"/>
 <center id="purchase_order">
 <br>
-<p class="flexbox wrapper btn btn-info"><?php echo $today ?> 변경모델</p>
+<p class="flexbox wrapper btn btn-info"><?php echo $date ?> 변경모델</p>
 
 <?php
-    $query = "SELECT DISTINCT model_name FROM lg_db WHERE support_date=$today";
+    $query = "SELECT DISTINCT machine_name FROM t_world WHERE support_date='$date'";
     $sql = mysqli_query($conn , $query);
     $t=0;
     $total_record = mysqli_num_rows($sql);
+    // echo '$count : '.$total_record.'<br>';
 ?>
 
 <br>
 <br>
 <p class="btn btn-outline-danger">공시지원금 변동 <?php echo $total_record ?>건</p>
-
+<br>
 <?php 
     while($row = mysqli_fetch_array($sql)){
         $t ++ ;
-        if($t % 5 ==0 ){
+        if( $t % 5 ==0){
             ?>
             <button type="button" id="change_name" class="btn btn-outline-info"><?php echo $row['machine_name'];?></button>
             <br>
@@ -173,10 +178,10 @@ $(document).on("click","#change_name",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM lg_db WHERE support_date=$today ORDER BY model_name , plan_money";
+      $query = "SELECT * FROM t_world WHERE support_date='$date' ORDER BY machine_name , plan_money";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
-      while( $row = mysqli_fetch_array($result)){
+      while( $row = mysqli_fetch_array($sql)){
     ?>
 <table>
     <tr class="flexbox wrapper">
@@ -192,8 +197,7 @@ $(document).on("click","#change_name",function() {
 
     <?php
     }
-}
-else {
+} else {
     ?>
 
     <tr>

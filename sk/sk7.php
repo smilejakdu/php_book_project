@@ -115,7 +115,7 @@ $(document).on("click","#change_name",function() {
 <br>
 <div class="flexbox wrapper center">
 
-    <button type="submit" class="button2">SKT</button>
+    <a href="../skt/skt_world.php"><button type="submit" class="button2">SKT</button></a>
 
     <a href="http://localhost:8000/kt/">
         <button type="submit" class="button2">KT</button>
