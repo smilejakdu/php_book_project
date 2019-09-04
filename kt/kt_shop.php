@@ -46,7 +46,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 <center>
     <div class="flexbox2 wrapper">
         <button type="submit" class="item3">전일</button>
-        <span> SKT World / 공시지원금 변동현황</span>
+        <span> KT Shop / 공시지원금 변동현황</span>
         <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $today ?>"/>
         <input type="button" name="range" id="range" value="확인" class="item3"/>
         <br>
@@ -74,7 +74,7 @@ $(document).ready(function(){
                 var date = $('#date').val();
                 if(date != ''){
                         $.ajax({
-                                url:"skt_range.php",
+                                url:"kt_shop_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -97,7 +97,7 @@ $(document).on("click","#change_name",function() {
     var date = $('#date').val();
     if(date !=''){
         $.ajax({
-            url:"skt_model_click.php",
+            url:"kt_shop_model_click.php",
             method:"POST",
             data:{changed_machine_name:changed_machine_name,date:date},
             success:function(data)
@@ -115,10 +115,12 @@ $(document).on("click","#change_name",function() {
 <br>
 <div class="flexbox wrapper center">
 
-    <button type="submit" class="button">SKT</button>
+    <a href="../skt/skt_world.php">
+        <button type="submit" class="button2">SKT</button>
+    </a>
 
-    <a href="../kt/kt_shop.php">
-        <button type="submit" class="button2">KT</button>
+    <a href="http://localhost:8000/kt/">
+        <button type="submit" class="button">KT</button>
     </a>
 
     <a href="http://localhost:8000/lg/">

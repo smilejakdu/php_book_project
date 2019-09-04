@@ -14,8 +14,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <head>
     <title>U and Soft and xeronote </title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 , user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -117,7 +116,7 @@ $(document).on("click","#change_name",function() {
 
     <a href="../skt/skt_world.php"><button type="submit" class="button2">SKT</button></a>
 
-    <a href="http://localhost:8000/kt/">
+    <a href="../kt/kt_shop.php">
         <button type="submit" class="button2">KT</button>
     </a>
 
