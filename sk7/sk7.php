@@ -39,14 +39,13 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     date_default_timezone_set('Asia/Seoul');
     $date = strtotime("Now");
     $date="".date('Y-m-d', $date);
-    // $date="2019-08-01";
 ?>
 
 <center>
     <div class="flexbox2 wrapper">
-        <button type="submit" class="item3">전일</button>
+        <button type="submit" class="item3" id="yesterday">전일</button>
         <span> sk 7 Mobile / 공시지원금 변동현황</span>
-        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $date ?>"/>
+        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $date ?>" value="<?php echo $date ?>"/>
         <input type="button" name="range" id="range" value="확인" class="item3"/>
         <br>
     </div>
@@ -107,10 +106,15 @@ $(document).on("click","#change_name",function() {
     }
 });
 
+$(document).on("click","#yesterday",function() {
+
+    var date = $('#date').val();
+    date = date.replace(/-/gi,"");
+    alert(date);
+});
+
 </script>
-
 <br>
-
 <br>
 <div class="flexbox wrapper center">
 
@@ -150,6 +154,7 @@ $(document).on("click","#change_name",function() {
 <br>
 <br>
 <p class="btn btn-outline-danger">공시지원금 변동 <?php echo $total_record ?>건</p>
+<br>
 
 <?php 
     while($row = mysqli_fetch_array($sql)){

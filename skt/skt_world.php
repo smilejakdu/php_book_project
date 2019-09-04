@@ -47,7 +47,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     <div class="flexbox2 wrapper">
         <button type="submit" class="item3">전일</button>
         <span> SKT World / 공시지원금 변동현황</span>
-        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $today ?>"/>
+        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $today ?>" value="<?php echo $today ?>"/>
         <input type="button" name="range" id="range" value="확인" class="item3"/>
         <br>
     </div>
