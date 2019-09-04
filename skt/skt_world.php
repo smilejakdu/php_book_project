@@ -128,7 +128,7 @@ $(document).on("click","#change_name",function() {
 </div>
 <div class="flexbox wrapper">
     <a href="../lg_mobile/lg_mobile.php"><button type="submit" class="button2">U+알뜰모바일</button></a>
-    <a href="../sk/sk7.php"><button type="submit" class="button2">SK 7모바일</button></a>
+    <a href="../sk7/sk7.php"><button type="submit" class="button2">SK 7모바일</button></a>
     <button type="submit" class="button2">KT M모바일</button>
     <button type="submit" class="button2">헬로모바일(SKT)</button>
     <button type="submit" class="button2">헬로모바일(KT)</button>
