@@ -50,7 +50,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <script>
 
-$(document).ready(function(){
+$(function(){
 
         $.datepicker.setDefaults({
                 monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
@@ -65,11 +65,12 @@ $(document).ready(function(){
                     altField:"#alternate"
                 });
         });
-        $('#range').click(function(){
-                var date = $('#date').val();
+
+        function dataload(){
+            var date = $('#date').val();
                 if(date != ''){
                         $.ajax({
-                                url:"lg_mobile_range.php",
+                                url:"sk7_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -78,10 +79,48 @@ $(document).ready(function(){
                                 }
                         });
                 }
-                // else
-                // {
-                //         alert("날짜를 선택하세요");
-                // }
+        }
+
+        function yester_dataload(){
+            var date = $('#date').val();
+            var date_arr = date.split('-');
+            var year = Number(date_arr[0]);
+            var month = Number(date_arr[1]);
+            var day = Number(date_arr[2]);
+            var create_date = new Date(year,month,day);
+
+            var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+            var year = create_date.getFullYear();
+            var month = months[create_date.getMonth()-1];
+            var day = create_date.getDate()-1;
+            var hour = create_date.getHours();
+            var min = create_date.getMinutes();
+            var sec = create_date.getSeconds();
+
+            if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
+                day = "0" +day;          
+            }
+            date = year + '-' + month + '-' + day ;
+                if(date != ''){
+                        $.ajax({
+                                url:"sk7_range.php",
+                                method:"POST",
+                                data:{date:date},
+                                success:function(data)
+                                {   
+                                    $('#purchase_order').html(data);
+                                    $('#date').val(date);
+                                }
+                        });
+                }
+        }
+
+        $('#confirm').click(function(){
+            dataload();
+        });
+
+        $('#yesterday').click(function(){
+            yester_dataload();
         });
 });
 
@@ -92,7 +131,7 @@ $(document).on("click","#change_name",function() {
     var date = $('#date').val();
     if(date !=''){
         $.ajax({
-            url:"lg_mobile_model_click.php",
+            url:"sk7_model_click.php",
             method:"POST",
             data:{changed_model_name:changed_model_name,date:date},
             success:function(data)

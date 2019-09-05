@@ -38,22 +38,22 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 <?php
     date_default_timezone_set('Asia/Seoul');
     $date = strtotime("Now");
-    $date="".date('Y-m-d', $date);
+    $today=date('Y-m-d', $date);
 ?>
 
 <center>
     <div class="flexbox2 wrapper">
         <button type="submit" class="item3" id="yesterday">전일</button>
         <span> sk 7 Mobile / 공시지원금 변동현황</span>
-        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $date ?>" value="<?php echo $date ?>"/>
-        <input type="button" name="range" id="range" value="확인" class="item3"/>
+        <input type="text" name="date" id="date" class="date_button" value="<?php echo $today ?>"/>
+        <input type="button" name="confirm" id="confirm" value="확인" class="item3"/>
         <br>
     </div>
 </center>
 
 <script>
 
-$(document).ready(function(){
+$(function(){
 
         $.datepicker.setDefaults({
                 monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
@@ -68,8 +68,9 @@ $(document).ready(function(){
                     altField:"#alternate"
                 });
         });
-        $('#range').click(function(){
-                var date = $('#date').val();
+
+        function dataload(){
+            var date = $('#date').val();
                 if(date != ''){
                         $.ajax({
                                 url:"sk7_range.php",
@@ -81,10 +82,48 @@ $(document).ready(function(){
                                 }
                         });
                 }
-                // else
-                // {
-                //         alert("날짜를 선택하세요");
-                // }
+        }
+
+        function yester_dataload(){
+            var date = $('#date').val();
+            var date_arr = date.split('-');
+            var year = Number(date_arr[0]);
+            var month = Number(date_arr[1]);
+            var day = Number(date_arr[2]);
+            var create_date = new Date(year,month,day);
+
+            var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+            var year = create_date.getFullYear();
+            var month = months[create_date.getMonth()-1];
+            var day = create_date.getDate()-1;
+            var hour = create_date.getHours();
+            var min = create_date.getMinutes();
+            var sec = create_date.getSeconds();
+
+            if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
+                day = "0" +day;          
+            }
+            date = year + '-' + month + '-' + day ;
+                if(date != ''){
+                        $.ajax({
+                                url:"sk7_range.php",
+                                method:"POST",
+                                data:{date:date},
+                                success:function(data)
+                                {   
+                                    $('#purchase_order').html(data);
+                                    $('#date').val(date);
+                                }
+                        });
+                }
+        }
+
+        $('#confirm').click(function(){
+            dataload();
+        });
+
+        $('#yesterday').click(function(){
+            yester_dataload();
         });
 });
 
@@ -104,13 +143,6 @@ $(document).on("click","#change_name",function() {
             }
         });
     }
-});
-
-$(document).on("click","#yesterday",function() {
-
-    var date = $('#date').val();
-    date = date.replace(/-/gi,"");
-    alert(date);
 });
 
 </script>
@@ -141,10 +173,10 @@ $(document).on("click","#yesterday",function() {
 <hr width="800" class="flexbox wrapper"/>
 <center id="purchase_order">
 <br>
-<p class="flexbox wrapper btn btn-info"><?php echo $date ?> 변경모델</p>
+<p class="flexbox wrapper btn btn-info"><?php echo $today ?> 변경모델</p>
 
 <?php
-    $query = "SELECT DISTINCT model_name FROM sk_db WHERE support_date='$date'";
+    $query = "SELECT DISTINCT model_name FROM sk7_db WHERE support_date='$today'";
     $sql = mysqli_query($conn , $query);
     $t=0;
     $total_record = mysqli_num_rows($sql);
@@ -159,7 +191,7 @@ $(document).on("click","#yesterday",function() {
 <?php 
     while($row = mysqli_fetch_array($sql)){
         $t ++ ;
-        if( $t % 5 ==0){
+        if( $t % 5 == 0){
             ?>
             <button type="button" id="change_name" class="btn btn-outline-info"><?php echo $row['model_name'];?></button>
             <br>
@@ -182,7 +214,7 @@ $(document).on("click","#yesterday",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM sk_db WHERE support_date='$date' ORDER BY model_name , plan_money";
+      $query = "SELECT * FROM sk7_db WHERE support_date='$today' ORDER BY model_name , plan_money";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($sql)){

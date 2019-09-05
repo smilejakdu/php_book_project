@@ -10,7 +10,7 @@ if(isset($_POST["date"])){
 		$result.='
 		<br>
 		<p class="flexbox wrapper btn btn-info">'.$_POST["date"].' 변경모델<p>';
-		$query = "SELECT DISTINCT machine_name FROM t_world WHERE support_date ='".$_POST["date"]."'";
+		$query = "SELECT DISTINCT machine_name FROM skt_world WHERE support_date ='".$_POST["date"]."'";
 		$sql = mysqli_query($conn, $query);
 		$t=0;
 		$total_record = mysqli_num_rows($sql);
@@ -41,7 +41,7 @@ if(isset($_POST["date"])){
 			<div class="button">공시일자</div>
 		</div>';
 
-		$query = "SELECT * FROM t_world WHERE support_date ='".$_POST["date"]."' ORDER BY machine_name";
+		$query = "SELECT * FROM skt_world WHERE support_date ='".$_POST["date"]."' ORDER BY machine_name";
         $sql = mysqli_query($conn, $query);
         if(mysqli_num_rows($sql) > 0){
 		while($row = mysqli_fetch_array($sql)){
