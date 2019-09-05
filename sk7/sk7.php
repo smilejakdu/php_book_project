@@ -37,8 +37,8 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <?php
     date_default_timezone_set('Asia/Seoul');
-    $date = strtotime("Now");
-    $today=date('Y-m-d', $date);
+    $today = strtotime("Now");
+    $today="".date('Y-m-d', $today);
 ?>
 
 <center>

@@ -14,7 +14,6 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <head>
     <title>U and Soft and xeronote </title>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0 , user-scalable=no"> -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -40,15 +39,14 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     date_default_timezone_set('Asia/Seoul');
     $today = strtotime("Now");
     $today="".date('Y-m-d', $today);
-    // $date="2019-08-01";
 ?>
 
 <center>
     <div class="flexbox2 wrapper">
-        <button type="submit" class="item3">전일</button>
+        <button type="submit" class="item3" id="yesterday">전일</button>
         <span> SKT World / 공시지원금 변동현황</span>
-        <input type="text" name="date" id="date" class="date_button" placeholder="<?php echo $today ?>" value="<?php echo $today ?>"/>
-        <input type="button" name="range" id="range" value="확인" class="item3"/>
+        <input type="text" name="date" id="date" class="date_button" value="<?php echo $today ?>"/>
+        <input type="button" name="confirm" id="confirm" value="확인" class="item3"/>
         <br>
     </div>
 </center>
@@ -132,13 +130,13 @@ $(function(){
 $(document).on("click","#change_name",function() {
 	// 이렇게하면 button element 를 클릭했을때 
 	// 해당하는 model_name 이 보이게 된다 
-	var changed_model_name =$(this).text();
+	var changed_machine_name =$(this).text();
     var date = $('#date').val();
     if(date !=''){
         $.ajax({
             url:"skt_model_click.php",
             method:"POST",
-            data:{changed_model_name:changed_model_name,date:date},
+            data:{changed_machine_name:changed_machine_name,date:date},
             success:function(data)
             {
                 $('#purchase_order').html(data);
@@ -148,13 +146,11 @@ $(document).on("click","#change_name",function() {
 });
 
 </script>
-
 <br>
-
 <br>
 <div class="flexbox wrapper center">
 
-    <button type="submit" class="button">SKT</button>
+    <a href="../skt/skt_world.php"><button type="submit" class="button">SKT</button></a>
 
     <a href="../kt/kt_shop.php">
         <button type="submit" class="button2">KT</button>
@@ -190,11 +186,12 @@ $(document).on("click","#change_name",function() {
 <br>
 <br>
 <p class="btn btn-outline-danger">공시지원금 변동 <?php echo $total_record ?>건</p>
+<br>
 
 <?php 
     while($row = mysqli_fetch_array($sql)){
         $t ++ ;
-        if( $t % 5 ==0){
+        if( $t % 5 == 0){
             ?>
             <button type="button" id="change_name" class="btn btn-outline-info"><?php echo $row['machine_name'];?></button>
             <br>

@@ -16,8 +16,7 @@ if(isset($_POST["date"])){
 		$total_record = mysqli_num_rows($sql);
 		$result .='
 		<p class="btn btn-outline-danger">공시지원금 변동 '.$total_record.'건</p>
-		<br>
-		';
+		<br>';
 
 		while($row = mysqli_fetch_array($sql)){
 			$t ++; 

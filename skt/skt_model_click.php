@@ -60,19 +60,19 @@ if(isset( $_POST["changed_machine_name"] , $_POST["date"]  )){
             <div class="button">공시일자</div>
 		</div>';
 
-		$query = "SELECT * FROM skt_world WHERE machine_name ='".$_POST["changed_machine_name"]."' AND support_date ='".$_POST["date"]."' ORDER BY plan_money";
+		$query = "SELECT * FROM skt_world WHERE machine_name ='".$_POST["changed_machine_name"]."' AND support_date = '".$_POST["date"]."'  ORDER BY plan_money";
         $sql = mysqli_query($conn, $query);
         if(mysqli_num_rows($sql) > 0){
 		while($row = mysqli_fetch_array($sql)){
 			$result .='
       <table>
 			<tr class="flexbox wrapper">
-  			<td>'.$row["machine_name"].'</td>
-  			<td>'.$row["model_name"].'</td>
-  			<td>'.$row["plan_money"].'</td>
-  			<td>'.$row["shipment_money"].'</td>
-            <td>'.$row["disclosure_money"].'</td>
-  			<td>'.$row["support_date"].'</td>
+				<td>'.$row["machine_name"].'</td>
+				<td>'.$row["model_name"].'</td>
+				<td>'.$row["plan_money"].'</td>
+				<td>'.$row["shipment_money"].'</td>
+				<td>'.$row["disclosure_money"].'</td>
+				<td>'.$row["support_date"].'</td>
 			</tr>
       </br>
       <hr width="800" class="flexbox wrapper"/>
