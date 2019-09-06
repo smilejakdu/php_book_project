@@ -42,7 +42,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
-$sql = "truncate table sk_db;";
+$sql = "truncate table sk7_db;";
 mysqli_query($conn,$sql);
 
 for($i=$spage; $i<=$epage; $i++){
@@ -89,7 +89,7 @@ for($i=$spage; $i<=$epage; $i++){
       $plaintext8 = $item ->find('td',8)->plaintext;
       echo $plaintext0 ,$plaintext1 , $plaintext2 , $plaintext3 , $plaintext6 , $plaintext8 ;
       echo "<br/>";
-      $sql = "INSERT INTO sk_db (machine_name, model_name, plan_money,shipment_money,disclosure_money,support_date)
+      $sql = "INSERT INTO sk7_db (machine_name, model_name, plan_money,shipment_money,disclosure_money,support_date)
         VALUES ('$plaintext0', '$plaintext1', '$plaintext2','$plaintext3','$plaintext6','$plaintext8')";
 
         if ($conn->query($sql) === TRUE) {

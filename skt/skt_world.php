@@ -43,10 +43,10 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 <center>
     <div class="flexbox2 wrapper">
-        <button type="submit" class="item3" id="yesterday">전일</button>
+        <button type="submit" class="item3" id="yesterday">◀</button>
+        <button type="submit" class="item3" id="tomorrow">▶</button>
         <span> SKT World / 공시지원금 변동현황</span>
         <input type="text" name="date" id="date" class="date_button" value="<?php echo $today ?>"/>
-        <input type="button" name="confirm" id="confirm" value="확인" class="item3"/>
         <br>
     </div>
 </center>
@@ -63,26 +63,26 @@ $(function(){
                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
                 dateFormat: 'yy-mm-dd'
         });
+
         $(function(){
                 $("#date").datepicker({
-                    altField:"#alternate"
+                    onSelect: function(dateText, inst) {
+                    $("input[name='date']").val(dateText);
+                    var date = $('#date').val();
+                            if(date != ''){
+                                $.ajax({
+                                        url:"skt_range.php",
+                                        method:"POST",
+                                        data:{date:date},
+                                        success:function(data)
+                                        {
+                                            $('#purchase_order').html(data);
+                                        }
+                                });
+                            }
+                        }
                 });
         });
-
-        function dataload(){
-            var date = $('#date').val();
-                if(date != ''){
-                        $.ajax({
-                                url:"skt_range.php",
-                                method:"POST",
-                                data:{date:date},
-                                success:function(data)
-                                {
-                                    $('#purchase_order').html(data);
-                                }
-                        });
-                }
-        }
 
         function yester_dataload(){
             var date = $('#date').val();
@@ -118,12 +118,52 @@ $(function(){
                 }
         }
 
-        $('#confirm').click(function(){
-            dataload();
-        });
+
+        function tomorrow_dataload(){
+            var date = $('#date').val();
+            var today = '<?=$today?>'
+            if(date == today){
+                alert(today+" 이 마지막 데이터 입니다 . ! ");
+            }
+            var date_arr = date.split('-');
+            var year = Number(date_arr[0]);
+            var month = Number(date_arr[1]);
+            var day = Number(date_arr[2]);
+            var create_date = new Date(year,month,day);
+
+            var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+            var year = create_date.getFullYear();
+            var month = months[create_date.getMonth()-1];
+            var day = create_date.getDate()+1;
+            var hour = create_date.getHours();
+            var min = create_date.getMinutes();
+            var sec = create_date.getSeconds();
+
+            if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
+                day = "0" +day;          
+            }
+            date = year + '-' + month + '-' + day ;
+                if(date != ''){
+                        $.ajax({
+                                url:"skt_range.php",
+                                method:"POST",
+                                data:{date:date},
+                                success:function(data)
+                                {   
+                                    $('#purchase_order').html(data);
+                                    $('#date').val(date);
+                                }
+                        });
+                }
+        }
+
 
         $('#yesterday').click(function(){
             yester_dataload();
+        });
+
+        $('#tomorrow').click(function(){
+            tomorrow_dataload();
         });
 });
 
