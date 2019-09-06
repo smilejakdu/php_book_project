@@ -96,13 +96,12 @@ $(function(){
             var year = create_date.getFullYear();
             var month = months[create_date.getMonth()-1];
             var day = create_date.getDate()-1;
-            var hour = create_date.getHours();
-            var min = create_date.getMinutes();
-            var sec = create_date.getSeconds();
+
 
             if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
                 day = "0" +day;          
             }
+
             date = year + '-' + month + '-' + day ;
                 if(date != ''){
                         $.ajax({
