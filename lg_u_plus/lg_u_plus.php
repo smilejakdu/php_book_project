@@ -45,7 +45,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     <div class="flexbox2 wrapper">
         <button type="submit" class="item3" id="yesterday">◀</button>
         <button type="submit" class="item3" id="tomorrow">▶</button>
-        <span> sk 7 Mobile / 공시지원금 변동현황</span>
+        <span> LG U+ / 공시지원금 변동현황</span>
         <input type="text" name="date" id="date" class="date_button" value="<?php echo $today ?>"/>
         <br>
     </div>
@@ -71,7 +71,7 @@ $(function(){
                     var date = $('#date').val();
                             if(date != ''){
                         $.ajax({
-                                url:"sk7_range.php",
+                                url:"lg_u_plus_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -91,25 +91,24 @@ $(function(){
             var year = Number(date_arr[0]);
             var month = Number(date_arr[1]);
             var day = Number(date_arr[2]);
-
             var create_date = new Date(year,month,day);
+
             var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
             var year = create_date.getFullYear();
             var month = months[create_date.getMonth()-1];
             var day = create_date.getDate()-1;
 
-            var modify_create_date = new Date(year , month , day);
-            show_date=modify_create_date.setDate(modify_create_date.getDate()-1);
-            alert(show_date);
+            var lastDay = ( new Date( year, months[create_date.getMonth()-2], 0) ).getDate(); // 지난달 마지막 날짜 
+            // alert(typeof(lastDay)); // Number 즉 int 형 
+            // alert( lastDay);
 
             if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
                 day = "0" +day;     
             }
-            
             date = year + '-' + month + '-' + day ;
                 if(date != ''){
                         $.ajax({
-                                url:"sk7_range.php",
+                                url:"lg_u_plus_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -148,7 +147,7 @@ $(function(){
             date = year + '-' + month + '-' + day ;
                 if(date != ''){
                         $.ajax({
-                                url:"sk7_range.php",
+                                url:"lg_u_plus_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -177,7 +176,7 @@ $(document).on("click","#change_name",function() {
     var date = $('#date').val();
     if(date !=''){
         $.ajax({
-            url:"sk7_model_click.php",
+            url:"lg_u_plus_model_click.php",
             method:"POST",
             data:{changed_model_name:changed_model_name,date:date},
             success:function(data)
@@ -199,14 +198,12 @@ $(document).on("click","#change_name",function() {
         <button type="submit" class="button2">KT</button>
     </a>
 
-    <a href="http://localhost:8000/lg/">
-        <button type="submit" class="button2">LG U+</button>
-    </a>
+        <button type="submit" class="button">LG U+</button>
 
 </div>
 <div class="flexbox wrapper">
     <a href="../lg_mobile/lg_mobile.php"><button type="submit" class="button2">U+알뜰모바일</button></a>
-    <button type="submit" class="button">SK 7모바일</button>
+    <a href="../sk7/sk7.php"><button type="submit" class="button2">SK 7모바일</button></a>
     <button type="submit" class="button2">KT M모바일</button>
     <button type="submit" class="button2">헬로모바일(SKT)</button>
     <button type="submit" class="button2">헬로모바일(KT)</button>
@@ -219,7 +216,7 @@ $(document).on("click","#change_name",function() {
 <p class="flexbox wrapper btn btn-info"><?php echo $today ?> 변경모델</p>
 
 <?php
-    $query = "SELECT DISTINCT model_name FROM sk7_db WHERE support_date='$today'";
+    $query = "SELECT DISTINCT model_name FROM u_plus_shop WHERE support_date='$today'";
     $sql = mysqli_query($conn , $query);
     $t=0;
     $total_record = mysqli_num_rows($sql);
@@ -257,7 +254,7 @@ $(document).on("click","#change_name",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM sk7_db WHERE support_date='$today' ORDER BY model_name , plan_money";
+      $query = "SELECT * FROM u_plus_shop WHERE support_date='$today' ORDER BY model_name , plan_money";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($sql)){
