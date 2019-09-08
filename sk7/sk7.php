@@ -91,22 +91,25 @@ $(function(){
             var year = Number(date_arr[0]);
             var month = Number(date_arr[1]);
             var day = Number(date_arr[2]);
+            day = String(day);
 
-            var create_date = new Date(year,month,day);
-            var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-            var year = create_date.getFullYear();
-            var month = months[create_date.getMonth()-1];
-            var day = create_date.getDate()-1;
+            if(day =="1" || day =="01"){ // 만약 2019-09-01 이라면 
+                year = Number(year);
+                number_month = Number(month)-1;
+                day = Number(day);
+                var create_date = new Date(year , number_month , day); //10-1
+                // 2019-9-1 이 출력이 되니깐 
+                // setDate(0); 을 했을때는 ,2019-09-31이 출력이 된다. 
+                create_date.setDate(0);
+                var year = create_date.getFullYear();
+                var month = create_date.getMonth()+1;
+                var day = create_date.getDate();
 
-            var modify_create_date = new Date(year , month , day);
-            show_date=modify_create_date.setDate(modify_create_date.getDate()-1);
-            alert(show_date);
+                if((month+"").length < 2){
+                    month = "0"+month;
+                }
 
-            if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
-                day = "0" +day;     
-            }
-            
-            date = year + '-' + month + '-' + day ;
+                date = year + '-' + month + '-' + day ;
                 if(date != ''){
                         $.ajax({
                                 url:"sk7_range.php",
@@ -120,6 +123,37 @@ $(function(){
                                 }
                         });
                 }
+            }else { // 만약 2019-09-01 이 아니라면 
+
+                // 어제 날짜
+                var nowDate = new Date(year , month , day);
+                var yesterDate = nowDate.getTime() - (1 * 24 * 60 * 60 * 1000);
+                nowDate.setTime(yesterDate);
+                
+                var yesterYear = nowDate.getFullYear();
+                var yesterMonth = nowDate.getMonth();
+                var yesterDay = nowDate.getDate();
+                        
+                if(yesterMonth < 10){ yesterMonth = "0" + yesterMonth; }
+                if(yesterDay < 10) { yesterDay = "0" + yesterDay; }
+                        
+                var date = yesterYear + "-" + yesterMonth + "-" + yesterDay;
+
+
+                if(date != ''){
+                        $.ajax({
+                                url:"sk7_range.php",
+                                method:"POST",
+                                data:{date:date},
+                                success:function(data)
+                                {   
+                                    $('#purchase_order').html(data);
+                                    $('#date').val(date);
+                                    
+                                }
+                        });
+                }
+            }
         }
 
         function tomorrow_dataload(){
