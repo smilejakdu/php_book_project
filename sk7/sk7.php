@@ -91,25 +91,19 @@ $(function(){
             var year = Number(date_arr[0]);
             var month = Number(date_arr[1]);
             var day = Number(date_arr[2]);
-            day = String(day);
 
-            if(day =="1" || day =="01"){ // 만약 2019-09-01 이라면 
-                year = Number(year);
-                number_month = Number(month)-1;
-                day = Number(day);
-                var create_date = new Date(year , number_month , day); //10-1
-                // 2019-9-1 이 출력이 되니깐 
-                // setDate(0); 을 했을때는 ,2019-09-31이 출력이 된다. 
+            if(day == 1){ // 만약 2019-09-01 이라면 
+                var create_date = new Date(year , month-1 , day);
                 create_date.setDate(0);
-                var year = create_date.getFullYear();
-                var month = create_date.getMonth()+1;
-                var day = create_date.getDate();
+                var yesterYear = create_date.getFullYear();
+                var yesterMonth = create_date.getMonth()+1;
+                var yesterDay = create_date.getDate();
 
-                if((month+"").length < 2){
-                    month = "0"+month;
-                }
+                if(yesterMonth < 10){ yesterMonth = "0" + yesterMonth; }
+                if(yesterDay < 10) { yesterDay = "0" + yesterDay; }
 
-                date = year + '-' + month + '-' + day ;
+                var date = yesterYear + "-" + yesterMonth + "-" + yesterDay;
+
                 if(date != ''){
                         $.ajax({
                                 url:"sk7_range.php",
@@ -123,6 +117,7 @@ $(function(){
                                 }
                         });
                 }
+                
             }else { // 만약 2019-09-01 이 아니라면 
 
                 // 어제 날짜
