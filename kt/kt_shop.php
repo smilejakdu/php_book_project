@@ -222,7 +222,7 @@ $(document).on("click","#change_name",function() {
         <button type="submit" class="button">KT</button>
     </a>
 
-    <a href="http://localhost:8000/lg/">
+    <a href="../lg_u_plus/lg_u_plus.php">
         <button type="submit" class="button2">LG U+</button>
     </a>
 
