@@ -91,21 +91,19 @@ $(function(){
             var year = Number(date_arr[0]);
             var month = Number(date_arr[1]);
             var day = Number(date_arr[2]);
-            var create_date = new Date(year,month,day);
 
-            var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-            var year = create_date.getFullYear();
-            var month = months[create_date.getMonth()-1];
-            var day = create_date.getDate()-1;
+            if(day == 1){ // 만약 2019-09-01 이라면 
+                var create_date = new Date(year , month-1 , day);
+                create_date.setDate(0);
+                var yesterYear = create_date.getFullYear();
+                var yesterMonth = create_date.getMonth()+1;
+                var yesterDay = create_date.getDate();
 
-            var lastDay = ( new Date( year, months[create_date.getMonth()-2], 0) ).getDate(); // 지난달 마지막 날짜 
-            // alert(typeof(lastDay)); // Number 즉 int 형 
-            // alert( lastDay);
+                if(yesterMonth < 10){ yesterMonth = "0" + yesterMonth; }
+                if(yesterDay < 10) { yesterDay = "0" + yesterDay; }
 
-            if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
-                day = "0" +day;     
-            }
-            date = year + '-' + month + '-' + day ;
+                var date = yesterYear + "-" + yesterMonth + "-" + yesterDay;
+
                 if(date != ''){
                         $.ajax({
                                 url:"lg_u_plus_range.php",
@@ -119,6 +117,38 @@ $(function(){
                                 }
                         });
                 }
+                
+            }else { // 만약 2019-09-01 이 아니라면 
+
+                // 어제 날짜
+                var nowDate = new Date(year , month , day);
+                var yesterDate = nowDate.getTime() - (1 * 24 * 60 * 60 * 1000);
+                nowDate.setTime(yesterDate);
+                
+                var yesterYear = nowDate.getFullYear();
+                var yesterMonth = nowDate.getMonth();
+                var yesterDay = nowDate.getDate();
+                        
+                if(yesterMonth < 10){ yesterMonth = "0" + yesterMonth; }
+                if(yesterDay < 10) { yesterDay = "0" + yesterDay; }
+                        
+                var date = yesterYear + "-" + yesterMonth + "-" + yesterDay;
+
+
+                if(date != ''){
+                        $.ajax({
+                                url:"lg_u_plus_range.php",
+                                method:"POST",
+                                data:{date:date},
+                                success:function(data)
+                                {   
+                                    $('#purchase_order').html(data);
+                                    $('#date').val(date);
+                                    
+                                }
+                        });
+                }
+            }
         }
 
         function tomorrow_dataload(){
