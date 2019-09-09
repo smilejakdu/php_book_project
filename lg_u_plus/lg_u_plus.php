@@ -284,7 +284,7 @@ $(document).on("click","#change_name",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM u_plus_shop WHERE support_date='$today' ORDER BY model_name , plan_money";
+      $query = "SELECT * FROM u_plus_shop WHERE support_date='$today' ORDER BY machine_name , model_name , plan_money";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($sql)){

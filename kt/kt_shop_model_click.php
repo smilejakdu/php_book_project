@@ -60,7 +60,7 @@ if(isset( $_POST["changed_machine_name"] , $_POST["date"]  )){
             <div class="button">공시일자</div>
 		</div>';
 
-		$query = "SELECT * FROM kt_shop WHERE machine_name ='".$_POST["changed_machine_name"]."' AND support_date = '".$_POST["date"]."'  ORDER BY plan_money";
+		$query = "SELECT * FROM kt_shop WHERE machine_name ='".$_POST["changed_machine_name"]."' AND support_date = '".$_POST["date"]."'  ORDER BY machine_name , model_name , plan_money";
         $sql = mysqli_query($conn, $query);
         if(mysqli_num_rows($sql) > 0){
 		while($row = mysqli_fetch_array($sql)){

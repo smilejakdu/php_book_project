@@ -286,7 +286,7 @@ $(document).on("click","#change_name",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM skt_world WHERE support_date='$today' ORDER BY machine_name , plan_money";
+      $query = "SELECT * FROM skt_world WHERE support_date='$today' ORDER BY machine_name , model_name , plan_money";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($sql)){

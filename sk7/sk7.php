@@ -161,20 +161,22 @@ $(function(){
             var year = Number(date_arr[0]);
             var month = Number(date_arr[1]);
             var day = Number(date_arr[2]);
-            var create_date = new Date(year,month,day);
 
-            var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-            var year = create_date.getFullYear();
-            var month = months[create_date.getMonth()-1];
-            var day = create_date.getDate()+1;
-            var hour = create_date.getHours();
-            var min = create_date.getMinutes();
-            var sec = create_date.getSeconds();
+            var lastDate = new Date(year , month , ""); // 이번달 마지막 날짜 구해온다. 
+            if(day == lastDate.getDate()){
+                alert("야호 ");
+                // 다음년도 1월을 구해야한다.
+                var nowDate = new Date(year , month+1 , 1);
 
-            if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
-                day = "0" +day;          
-            }
-            date = year + '-' + month + '-' + day ;
+                var tomorrowYear = nowDate.getFullYear();
+                var tomorrowMonth = nowDate.getMonth();
+                var tomorrowDay = nowDate.getDate();
+
+                if(tomorrowMonth < 10){ tomorrowMonth = "0" + tomorrowMonth; }
+                if(tomorrowDay < 10) { tomorrowDay = "0" + tomorrowDay; }
+
+                var date = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
+
                 if(date != ''){
                         $.ajax({
                                 url:"sk7_range.php",
@@ -187,6 +189,63 @@ $(function(){
                                 }
                         });
                 }
+            }else {
+
+                // 내일 날짜 
+                var nowDate = new Date(year , month , day);
+                var tomorrowDate = nowDate.getTime() + (1 * 24 * 60 * 60 * 1000);
+                nowDate.setTime(tomorrowDate);
+                var tomorrowYear = nowDate.getFullYear();
+                var tomorrowMonth = nowDate.getMonth();
+                var tomorrowDay = nowDate.getDate();
+                alert(tomorrowDay);
+
+                if(tomorrowMonth < 10){ tomorrowMonth = "0" + tomorrowMonth; }
+                if(tomorrowDay < 10) { tomorrowDay = "0" + tomorrowDay; }
+
+                var date = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
+
+                if(date != ''){
+                        $.ajax({
+                                url:"sk7_range.php",
+                                method:"POST",
+                                data:{date:date},
+                                success:function(data)
+                                {   
+                                    $('#purchase_order').html(data);
+                                    $('#date').val(date);
+                                }
+                        });
+                }
+
+
+            }
+            // var create_date = new Date(year,month,day);
+
+            // var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+            // var year = create_date.getFullYear();
+            // var month = months[create_date.getMonth()-1];
+            // var day = create_date.getDate()+1;
+            // var hour = create_date.getHours();
+            // var min = create_date.getMinutes();
+            // var sec = create_date.getSeconds();
+
+            // if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
+            //     day = "0" +day;          
+            // }
+            // date = year + '-' + month + '-' + day ;
+            //     if(date != ''){
+            //             $.ajax({
+            //                     url:"sk7_range.php",
+            //                     method:"POST",
+            //                     data:{date:date},
+            //                     success:function(data)
+            //                     {   
+            //                         $('#purchase_order').html(data);
+            //                         $('#date').val(date);
+            //                     }
+            //             });
+            //     }
         }
 
         $('#yesterday').click(function(){
@@ -286,7 +345,7 @@ $(document).on("click","#change_name",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM sk7_db WHERE support_date='$today' ORDER BY model_name , plan_money";
+      $query = "SELECT * FROM sk7_db WHERE support_date='$today' ORDER BY machine_name , model_name , plan_money";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($sql)){

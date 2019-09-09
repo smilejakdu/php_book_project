@@ -41,7 +41,7 @@ if(isset($_POST["date"])){
 			<div class="button">공시일자</div>
 		</div>';
 
-		$query = "SELECT * FROM lg_db WHERE support_date ='".$_POST["date"]."' ORDER BY model_name";
+		$query = "SELECT * FROM lg_db WHERE support_date ='".$_POST["date"]."' ORDER BY machine_name , model_name , plan_money";
         $sql = mysqli_query($conn, $query);
         if(mysqli_num_rows($sql) > 0){
 		while($row = mysqli_fetch_array($sql)){
