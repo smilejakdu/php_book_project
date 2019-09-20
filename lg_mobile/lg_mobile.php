@@ -160,20 +160,76 @@ $(function(){
             var year = Number(date_arr[0]);
             var month = Number(date_arr[1]);
             var day = Number(date_arr[2]);
-            var create_date = new Date(year,month,day);
+           
+        
+            var lastDate = new Date(year , month ,"").getDate(); // 이번달 마지막 날짜 구해온다.
+            // alert(lastDate); // 해당 월에 마지막 날짜가 찍힌다. 
 
-            var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-            var year = create_date.getFullYear();
-            var month = months[create_date.getMonth()-1];
-            var day = create_date.getDate()+1;
-            var hour = create_date.getHours();
-            var min = create_date.getMinutes();
-            var sec = create_date.getSeconds();
+            if(day == lastDate){
+                // 다음년도 1월을 구해야한다.
+                if(month == 11){
+                    alert("11월 입니다. ");
+                    var nowDate = new Date(year , 11 , 1);
 
-            if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
-                day = "0" +day;          
-            }
-            date = year + '-' + month + '-' + day ;
+                    var tomorrowYear = nowDate.getFullYear();
+                    var tomorrowMonth = nowDate.getMonth();
+                    var tomorrowDay = nowDate.getDate();
+
+                    if(tomorrowMonth < 10){ tomorrowMonth = "0" + tomorrowMonth; }
+                    if(tomorrowDay < 10) { tomorrowDay = "0" + tomorrowDay; }
+
+                    var date = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
+
+                    if(date != ''){
+                            $.ajax({
+                                    url:"lg_mobile_range.php",
+                                    method:"POST",
+                                    data:{date:date},
+                                    success:function(data)
+                                    {   
+                                        $('#purchase_order').html(data);
+                                        $('#date').val(date);
+                                    }
+                            });
+                    }
+
+                }else {
+                    var nowDate = new Date(year , month+1 , 1);
+
+                    var tomorrowYear = nowDate.getFullYear();
+                    var tomorrowMonth = nowDate.getMonth();
+                    var tomorrowDay = nowDate.getDate();
+
+                    if(tomorrowMonth < 10){ tomorrowMonth = "0" + tomorrowMonth; }
+                    if(tomorrowDay < 10) { tomorrowDay = "0" + tomorrowDay; }
+
+                    var date = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
+
+                    if(date != ''){
+                            $.ajax({
+                                    url:"lg_mobile_range.php",
+                                    method:"POST",
+                                    data:{date:date},
+                                    success:function(data)
+                                    {   
+                                        $('#purchase_order').html(data);
+                                        $('#date').val(date);
+                                    }
+                            });
+                    }
+                }
+                
+                var nowDate = new Date(year , month+1 , 1);
+
+                var tomorrowYear = nowDate.getFullYear();
+                var tomorrowMonth = nowDate.getMonth();
+                var tomorrowDay = nowDate.getDate();
+
+                if(tomorrowMonth < 10){ tomorrowMonth = "0" + tomorrowMonth; }
+                if(tomorrowDay < 10) { tomorrowDay = "0" + tomorrowDay; }
+
+                var date = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
+
                 if(date != ''){
                         $.ajax({
                                 url:"lg_mobile_range.php",
@@ -186,6 +242,32 @@ $(function(){
                                 }
                         });
                 }
+            }else {
+
+                // 내일 날짜 
+                var nowDate = new Date(year , month , day);
+                var tomorrowYear = nowDate.getFullYear();
+                var tomorrowMonth = nowDate.getMonth();
+                var tomorrowDay = nowDate.getDate()+1;
+
+                if(tomorrowMonth < 10){ tomorrowMonth = "0" + tomorrowMonth; }
+                if(tomorrowDay < 10) { tomorrowDay = "0" + tomorrowDay; }
+
+                var date = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
+
+                if(date != ''){
+                        $.ajax({
+                                url:"lg_mobile_range.php",
+                                method:"POST",
+                                data:{date:date},
+                                success:function(data)
+                                {   
+                                    $('#purchase_order').html(data);
+                                    $('#date').val(date);
+                                }
+                        });
+                }
+            }
         }
 
         $('#yesterday').click(function(){
@@ -234,9 +316,9 @@ $(document).on("click","#change_name",function() {
 <div class="flexbox wrapper">
     <a href="../lg_mobile/lg_mobile.php"><button type="submit" class="button">U+알뜰모바일</button></a>
     <a href="../sk7/sk7.php"><button type="submit" class="button2">SK 7모바일</button></a>
-    <button type="submit" class="button2">KT M모바일</button>
-    <button type="submit" class="button2">헬로모바일(SKT)</button>
-    <button type="submit" class="button2">헬로모바일(KT)</button>
+    <a href="../kt_m_mobile/kt_m_mobile.php"><button type="submit" class="button2">KT M모바일</button></a>
+    <a href="../hello_mobile_skt/hello_mobile_skt.php"><button type="submit" class="button2">헬로모바일(SKT)</button></a>
+    <a href="../hello_mobile_kt/hello_mobile_kt.php"><button type="submit" class="button2">헬로모바일(KT)</button></a>
 </div>
 <br>
 

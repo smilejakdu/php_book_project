@@ -56,7 +56,8 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 $(function(){
 
         $.datepicker.setDefaults({
-                monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
+                monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+                            '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'], // 개월 텍스트 설정
                 monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
                 dayNames: ['일', '월', '화', '수', '목', '금', '토'],
                 dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
@@ -161,11 +162,65 @@ $(function(){
             var year = Number(date_arr[0]);
             var month = Number(date_arr[1]);
             var day = Number(date_arr[2]);
+           
+        
+            var lastDate = new Date(year , month ,"").getDate(); // 이번달 마지막 날짜 구해온다.
+            // alert(lastDate); // 해당 월에 마지막 날짜가 찍힌다. 
 
-            var lastDate = new Date(year , month , ""); // 이번달 마지막 날짜 구해온다. 
-            if(day == lastDate.getDate()){
-                alert("야호 ");
+            if(day == lastDate){
                 // 다음년도 1월을 구해야한다.
+                if(month == 11){
+                    alert("11월 입니다. ");
+                    var nowDate = new Date(year , 11 , 1);
+
+                    var tomorrowYear = nowDate.getFullYear();
+                    var tomorrowMonth = nowDate.getMonth();
+                    var tomorrowDay = nowDate.getDate();
+
+                    if(tomorrowMonth < 10){ tomorrowMonth = "0" + tomorrowMonth; }
+                    if(tomorrowDay < 10) { tomorrowDay = "0" + tomorrowDay; }
+
+                    var date = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
+
+                    if(date != ''){
+                            $.ajax({
+                                    url:"sk7_range.php",
+                                    method:"POST",
+                                    data:{date:date},
+                                    success:function(data)
+                                    {   
+                                        $('#purchase_order').html(data);
+                                        $('#date').val(date);
+                                    }
+                            });
+                    }
+
+                }else {
+                    var nowDate = new Date(year , month+1 , 1);
+
+                    var tomorrowYear = nowDate.getFullYear();
+                    var tomorrowMonth = nowDate.getMonth();
+                    var tomorrowDay = nowDate.getDate();
+
+                    if(tomorrowMonth < 10){ tomorrowMonth = "0" + tomorrowMonth; }
+                    if(tomorrowDay < 10) { tomorrowDay = "0" + tomorrowDay; }
+
+                    var date = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
+
+                    if(date != ''){
+                            $.ajax({
+                                    url:"sk7_range.php",
+                                    method:"POST",
+                                    data:{date:date},
+                                    success:function(data)
+                                    {   
+                                        $('#purchase_order').html(data);
+                                        $('#date').val(date);
+                                    }
+                            });
+                    }
+                }
+                
                 var nowDate = new Date(year , month+1 , 1);
 
                 var tomorrowYear = nowDate.getFullYear();
@@ -193,12 +248,9 @@ $(function(){
 
                 // 내일 날짜 
                 var nowDate = new Date(year , month , day);
-                var tomorrowDate = nowDate.getTime() + (1 * 24 * 60 * 60 * 1000);
-                nowDate.setTime(tomorrowDate);
                 var tomorrowYear = nowDate.getFullYear();
                 var tomorrowMonth = nowDate.getMonth();
-                var tomorrowDay = nowDate.getDate();
-                alert(tomorrowDay);
+                var tomorrowDay = nowDate.getDate()+1;
 
                 if(tomorrowMonth < 10){ tomorrowMonth = "0" + tomorrowMonth; }
                 if(tomorrowDay < 10) { tomorrowDay = "0" + tomorrowDay; }
@@ -217,35 +269,7 @@ $(function(){
                                 }
                         });
                 }
-
-
             }
-            // var create_date = new Date(year,month,day);
-
-            // var months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-            // var year = create_date.getFullYear();
-            // var month = months[create_date.getMonth()-1];
-            // var day = create_date.getDate()+1;
-            // var hour = create_date.getHours();
-            // var min = create_date.getMinutes();
-            // var sec = create_date.getSeconds();
-
-            // if((day+"").length < 2){ // 만약에 일이 '7'로 찍히지 않고 '07'로 찍히도록 길이를 받아온다
-            //     day = "0" +day;          
-            // }
-            // date = year + '-' + month + '-' + day ;
-            //     if(date != ''){
-            //             $.ajax({
-            //                     url:"sk7_range.php",
-            //                     method:"POST",
-            //                     data:{date:date},
-            //                     success:function(data)
-            //                     {   
-            //                         $('#purchase_order').html(data);
-            //                         $('#date').val(date);
-            //                     }
-            //             });
-            //     }
         }
 
         $('#yesterday').click(function(){
@@ -294,10 +318,10 @@ $(document).on("click","#change_name",function() {
 </div>
 <div class="flexbox wrapper">
     <a href="../lg_mobile/lg_mobile.php"><button type="submit" class="button2">U+알뜰모바일</button></a>
-    <button type="submit" class="button">SK 7모바일</button>
-    <button type="submit" class="button2">KT M모바일</button>
-    <button type="submit" class="button2">헬로모바일(SKT)</button>
-    <button type="submit" class="button2">헬로모바일(KT)</button>
+    <a href="../sk7/sk7.php"><button type="submit" class="button">SK 7모바일</button></a>
+    <a href="../kt_m_mobile/kt_m_mobile.php"><button type="submit" class="button2">KT M모바일</button></a>
+    <a href="../hello_mobile_skt/hello_mobile_skt.php"><button type="submit" class="button2">헬로모바일(SKT)</button></a>
+    <a href="../hello_mobile_kt/hello_mobile_kt.php"><button type="submit" class="button2">헬로모바일(KT)</button></a>
 </div>
 <br>
 
@@ -322,7 +346,7 @@ $(document).on("click","#change_name",function() {
 <?php 
     while($row = mysqli_fetch_array($sql)){
         $t ++ ;
-        if( $t % 5 == 0){
+        if($t % 5 == 0){
             ?>
             <button type="button" id="change_name" class="btn btn-outline-info"><?php echo $row['model_name'];?></button>
             <br>

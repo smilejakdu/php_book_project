@@ -6,7 +6,7 @@ if(isset($_POST["query"]))
 {
  $search = mysqli_real_escape_string($connect, $_POST["query"]);
  $query = "
-  SELECT * FROM sk_db 
+  SELECT * FROM sk7_db 
   WHERE machine_name LIKE '%".$search."%'
   OR model_name LIKE '%".$search."%' 
  ";
@@ -14,7 +14,7 @@ if(isset($_POST["query"]))
 else
 {
  $query = "
-  SELECT * FROM sk_db ORDER BY machine_name
+  SELECT * FROM sk7_db ORDER BY machine_name
  ";
 }
 $result = mysqli_query($connect, $query);

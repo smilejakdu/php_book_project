@@ -55,7 +55,7 @@
     height: 40px;
   }
 
-    .button {
+  .button {
     border: 1px solid #405ea3;
     background-color: #4967ad;
     width: 150px;
@@ -69,6 +69,22 @@
     border-radius: 10px;
     text-align: center;
   }
+
+  .search_button {
+    border: 1px solid #405ea3;
+    background-color: #ffffff;
+    width: 2000px;
+    height: 30px;
+    margin: 10px;
+    font-size: 16px;
+    color: #2471A3;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 3px 16px;
+    border-radius: 10px;
+    text-align: left;
+  }
+
   .date_button {
     border: 1px solid #405ea3;
     background-color: #ffffff;
@@ -99,7 +115,6 @@
     text-align: center;
   }
 
-
   .button3 {
     border: 1px solid #1e83be;
     background-color: #ffffff;
@@ -119,12 +134,6 @@
     background-color: rgba(0, 0, 0, 0);
     color: skyblue;
     padding: 5px;
-  }
-
-  tr {
-    width: 150px;
-    height: 30px;
-    margin: 10px;
   }
 
   table,

@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "root";
+$username = "jakdu";
+$password = "##tkakrnl12";
 $dbname = "phone_db";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -45,7 +45,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     <div class="flexbox2 wrapper">
         <button type="submit" class="item3" id="yesterday">◀</button>
         <button type="submit" class="item3" id="tomorrow">▶</button>
-        <span> LG U+ / 공시지원금 변동현황</span>
+        <span> 헬로모바일(SKT) / 공시지원금 변동현황</span>
         <input type="text" name="date" id="date" class="date_button" value="<?php echo $today ?>"/>
         <br>
     </div>
@@ -56,14 +56,15 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 $(function(){
 
         $.datepicker.setDefaults({
-                monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
+                monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+                            '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'], // 개월 텍스트 설정
                 monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
                 dayNames: ['일', '월', '화', '수', '목', '금', '토'],
                 dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
                 dateFormat: 'yy-mm-dd'
         });
-
+        
         $(function(){
                 $("#date").datepicker({
                     onSelect: function(dateText, inst) {
@@ -71,7 +72,7 @@ $(function(){
                     var date = $('#date').val();
                             if(date != ''){
                         $.ajax({
-                                url:"lg_u_plus_range.php",
+                                url:"hello_mobile_skt_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -106,7 +107,7 @@ $(function(){
 
                 if(date != ''){
                         $.ajax({
-                                url:"lg_u_plus_range.php",
+                                url:"hello_mobile_skt_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -137,7 +138,7 @@ $(function(){
 
                 if(date != ''){
                         $.ajax({
-                                url:"lg_u_plus_range.php",
+                                url:"hello_mobile_skt_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -183,7 +184,7 @@ $(function(){
 
                     if(date != ''){
                             $.ajax({
-                                    url:"lg_u_plus_range.php",
+                                    url:"hello_mobile_skt_range.php",
                                     method:"POST",
                                     data:{date:date},
                                     success:function(data)
@@ -208,7 +209,7 @@ $(function(){
 
                     if(date != ''){
                             $.ajax({
-                                    url:"lg_u_plus_range.php",
+                                    url:"hello_mobile_skt_range.php",
                                     method:"POST",
                                     data:{date:date},
                                     success:function(data)
@@ -233,7 +234,7 @@ $(function(){
 
                 if(date != ''){
                         $.ajax({
-                                url:"lg_u_plus_range.php",
+                                url:"hello_mobile_skt_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -243,6 +244,7 @@ $(function(){
                                 }
                         });
                 }
+                
             }else {
 
                 // 내일 날짜 
@@ -258,7 +260,7 @@ $(function(){
 
                 if(date != ''){
                         $.ajax({
-                                url:"lg_u_plus_range.php",
+                                url:"hello_mobile_skt_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -288,7 +290,7 @@ $(document).on("click","#change_name",function() {
     var date = $('#date').val();
     if(date !=''){
         $.ajax({
-            url:"lg_u_plus_model_click.php",
+            url:"hello_mobile_skt_model_click.php",
             method:"POST",
             data:{changed_model_name:changed_model_name,date:date},
             success:function(data)
@@ -310,14 +312,16 @@ $(document).on("click","#change_name",function() {
         <button type="submit" class="button2">KT</button>
     </a>
 
-        <button type="submit" class="button">LG U+</button>
+    <a href="../lg_u_plus/lg_u_plus.php">
+        <button type="submit" class="button2">LG U+</button>
+    </a>
 
 </div>
 <div class="flexbox wrapper">
     <a href="../lg_mobile/lg_mobile.php"><button type="submit" class="button2">U+알뜰모바일</button></a>
     <a href="../sk7/sk7.php"><button type="submit" class="button2">SK 7모바일</button></a>
     <a href="../kt_m_mobile/kt_m_mobile.php"><button type="submit" class="button2">KT M모바일</button></a>
-    <a href="../hello_mobile_skt/hello_mobile_skt.php"><button type="submit" class="button2">헬로모바일(SKT)</button></a>
+    <a href="../hello_mobile_skt/hello_mobile_skt.php"><button type="submit" class="button">헬로모바일(SKT)</button></a>
     <a href="../hello_mobile_kt/hello_mobile_kt.php"><button type="submit" class="button2">헬로모바일(KT)</button></a>
 </div>
 <br>
@@ -328,7 +332,7 @@ $(document).on("click","#change_name",function() {
 <p class="flexbox wrapper btn btn-info"><?php echo $today ?> 변경모델</p>
 
 <?php
-    $query = "SELECT DISTINCT model_name FROM u_plus_shop WHERE support_date='$today'";
+    $query = "SELECT DISTINCT model_name FROM hello_mobile_skt WHERE support_date='$today'";
     $sql = mysqli_query($conn , $query);
     $t=0;
     $total_record = mysqli_num_rows($sql);
@@ -366,7 +370,7 @@ $(document).on("click","#change_name",function() {
     </div>
 
     <?php
-      $query = "SELECT * FROM u_plus_shop WHERE support_date='$today' ORDER BY machine_name , model_name , plan_money";
+      $query = "SELECT * FROM hello_mobile_skt WHERE support_date='$today' ORDER BY machine_name , model_name , plan_money";
       $sql = mysqli_query($conn, $query);
       if(mysqli_num_rows($sql) > 0){
       while( $row = mysqli_fetch_array($sql)){
@@ -380,7 +384,6 @@ $(document).on("click","#change_name",function() {
       <td><?php echo $row['disclosure_money'];?></td>
       <td><?php echo $row['support_date'];?></td>
     </tr>
-    </br>
     </br>
     <hr width="800" class="flexbox wrapper"/>
 
