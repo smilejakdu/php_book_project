@@ -5,15 +5,13 @@ $password = "root";
 $dbname = "phone_db";
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-// $sql = "SELECT * FROM sk_db ORDER BY machine_name;";
-// $result = mysqli_query( $conn, $sql );
 ?>
 
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <title>U and Soft and xeronote </title>
+    <title>U and Soft and xeronote</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -383,6 +381,7 @@ $(document).on("click","#change_name",function() {
       <td><?php echo $row['disclosure_money'];?></td>
       <td><?php echo $row['support_date'];?></td>
     </tr>
+    </br>
     </br>
     <hr width="800" class="flexbox wrapper"/>
 

@@ -55,7 +55,8 @@ if(isset($_POST["date"])){
             <td>'.$row["disclosure_money"].'</td>
   			<td>'.$row["support_date"].'</td>
 			</tr>
-      </br>
+	  </br>
+	  </br>
       <hr width="800" class="flexbox wrapper"/>
       ';
 		}
