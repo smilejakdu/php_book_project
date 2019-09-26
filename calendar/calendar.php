@@ -1,7 +1,7 @@
 <?php 
 	
 	//DB 셋팅 부분
-	$db = new mysqli('localhost', 'root', 'root', 'calendar'); //아이피,아이디,비밀번호,DB명
+	$db = new mysqli('localhost', 'root', 'root', 'calendar');
 	if ($db->connect_error) {
 		die('데이터베이스 연결에 문제가 있습니다. 관리자에게 문의 바랍니다.');
 		exit;
@@ -30,6 +30,7 @@
 	$result = $db->query($sql);
 	
 
+	
 	//받아온 이벤트 날짜 데이터를 while로 돌려서 배열에 각각 넣어준다. 
 	$rowSet = 0;
 	$specialDay = []; //배열 초기화
