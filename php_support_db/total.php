@@ -92,7 +92,7 @@ $(function(){
             var year = Number(date_arr[0]);
             var month = Number(date_arr[1]);
             var day = Number(date_arr[2]);
-            
+
             if(day == 1){ // 만약 2019-09-01 이라면 
                 var create_date = new Date(year , month-1 , day);
                 create_date.setDate(0);
@@ -104,10 +104,10 @@ $(function(){
                 if(yesterDay < 10) { yesterDay = "0" + yesterDay; }
 
                 var date = yesterYear + "-" + yesterMonth + "-" + yesterDay;
-
+                alert(date);
                 if(date != ''){
                         $.ajax({
-                                url:"index_range.php",
+                                url:"total_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -119,7 +119,7 @@ $(function(){
                         });
                 }
                 
-            }else{ // 만약 2019-09-01 이 아니라면 
+            }else { // 만약 2019-09-01 이 아니라면 
 
                 // 어제 날짜
                 var nowDate = new Date(year , month , day);
@@ -134,8 +134,9 @@ $(function(){
                 if(yesterDay < 10) { yesterDay = "0" + yesterDay; }
                         
                 var date = yesterYear + "-" + yesterMonth + "-" + yesterDay;
+                alert(date);
+
                 if(date != ''){
-                    alert(date); // 여기까지는 정상적으로 작동 어제 날짜가 출력됨 
                         $.ajax({
                                 url:"total_range.php",
                                 method:"POST",
@@ -144,7 +145,9 @@ $(function(){
                                 {   
                                     $('#purchase_order').html(data);
                                     $('#date').val(date);
-                                    
+                                },
+                                error:function(request , status , error){
+                                    alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
                                 }
                         });
                 }
@@ -183,7 +186,7 @@ $(function(){
 
                     if(date != ''){
                             $.ajax({
-                                    url:"index_range.php",
+                                    url:"total_range.php",
                                     method:"POST",
                                     data:{date:date},
                                     success:function(data)
@@ -208,7 +211,7 @@ $(function(){
 
                     if(date != ''){
                             $.ajax({
-                                    url:"index_range.php",
+                                    url:"total_range.php",
                                     method:"POST",
                                     data:{date:date},
                                     success:function(data)
@@ -233,7 +236,7 @@ $(function(){
 
                 if(date != ''){
                         $.ajax({
-                                url:"index_range.php",
+                                url:"total_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -258,7 +261,7 @@ $(function(){
 
                 if(date != ''){
                         $.ajax({
-                                url:"index_range.php",
+                                url:"total_range.php",
                                 method:"POST",
                                 data:{date:date},
                                 success:function(data)
@@ -278,8 +281,9 @@ $(function(){
         $('#tomorrow').click(function(){
             tomorrow_dataload();
         });
-        
+
 });
+
 
 </script>
 <?php
@@ -295,7 +299,7 @@ $(function(){
     $total_today_data_sum=0;
     
     $today_data_list = array($today_skt_world , $today_kt_shop , $today_lg_db , $today_sk7_db , $today_u_plus_shop , $today_kt_m_mobile ,$today_today_hello_kt ,$today_today_hello_skt);
-    $data_list = array('skt_world' , 'kt_shop' , 'lg_db' , 'sk7_db' , 'u_plus_shop' , 'kt_m_mobile' ,'today_hello_kt' , 'today_hello_skt');
+    $data_list = array('skt_world' , 'kt_shop' , 'lg_db' , 'sk7_db' , 'u_plus_shop' , 'kt_m_mobile' ,'hello_mobile_kt' , 'hello_mobile_skt');
 
     for ($i=0; $i<count($data_list); $i++){
         $query = "SELECT DISTINCT machine_name FROM {$data_list[$i]} WHERE support_date='$today'";
@@ -316,17 +320,17 @@ $(function(){
 </div>
 
 <div class="flexbox wrapper center">
-    <a href="./skt/skt_world.php" class="btn btn-outline-info button_size">SKT<?php echo "</br> $today_data_list[0]" ?>건</a>
-    <a href="./kt/kt_shop.php" class="btn btn-outline-info button_size">KT<?php echo "</br>$today_data_list[1]" ?>건</a>
-    <a href="./lg_u_plus/lg_u_plus.php" class="btn btn-outline-info button_size">LG U+<?php echo "</br>$today_data_list[2]" ?>건</a>
+    <a href="./skt/skt_world.php" id="move_skt_world" class="btn btn-outline-info button_size">SKT<?php echo "</br> $today_data_list[0]" ?>건</a>
+    <a href="./kt/kt_shop.php" id="move_kt_shop" class="btn btn-outline-info button_size">KT<?php echo "</br>$today_data_list[1]" ?>건</a>
+    <a href="./lg_u_plus/lg_u_plus.php" id="move_lg_u_plus" class="btn btn-outline-info button_size">LG U+<?php echo "</br>$today_data_list[2]" ?>건</a>
 </div>
 
 <div class="flexbox wrapper">
-    <a href="./lg_mobile/lg_mobile.php" class="btn btn-outline-info button_size">U+알뜰모바일<?php echo "</br>$today_data_list[3]" ?>건</a>
-    <a href="./sk7/sk7.php" class="btn btn-outline-info button_size">SK 7모바일<?php echo "</br>$today_data_list[4]" ?>건</a>
-    <a href="./kt_m_mobile/kt_m_mobile.php" class="btn btn-outline-info button_size">KT M모바일<?php echo "</br>$today_data_list[5]" ?>건</a>
-    <a href="./hello_mobile_skt/hello_mobile_skt.php" class="btn btn-outline-info button_size">헬로모바일(SKT)<?php echo "</br>$today_data_list[6]"?>건</a>
-    <a href="./hello_mobile_kt/hello_mobile_kt.php" class="btn btn-outline-info button_size">헬로모바일(KT)<?php echo "</br>$today_data_list[7]"?>건</a>
+    <a href="./lg_mobile/lg_mobile.php" id="move_lg_mobile" class="btn btn-outline-info button_size">U+알뜰모바일<?php echo "</br>$today_data_list[3]" ?>건</a>
+    <a href="./sk7/sk7.php" id="move_sk7" class="btn btn-outline-info button_size">SK 7모바일<?php echo "</br>$today_data_list[4]" ?>건</a>
+    <a href="./kt_m_mobile/kt_m_mobile.php" id="move_kt_m_mobile" class="btn btn-outline-info button_size">KT M모바일<?php echo "</br>$today_data_list[5]" ?>건</a>
+    <a href="./hello_mobile_skt/hello_mobile_skt.php" id="move_hello_mobile_skt" class="btn btn-outline-info button_size">헬로모바일(SKT)<?php echo "</br>$today_data_list[6]"?>건</a>
+    <a href="./hello_mobile_kt/hello_mobile_kt.php" id="move_hello_mobile_kt" class="btn btn-outline-info button_size">헬로모바일(KT)<?php echo "</br>$today_data_list[7]"?>건</a>
 </div>
 </center>
 <br>
