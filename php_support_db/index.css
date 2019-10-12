@@ -16,6 +16,11 @@
     justify-content: center;
   }
 
+  .home_wrapper {
+    width: 330px;
+    margin: 0 auto;
+  }  
+  
   .wrapper {
     width: 850px;
     margin: 0 auto;
@@ -200,10 +205,8 @@
   }
 
   .ui-datepicker td {
-
     border: 0;
     padding: 1px;
-
   }
 
   .ui-datepicker td span,
@@ -224,3 +227,4 @@
     border: 1px solid #4dd0e1;
     box-shadow: 0 0 0 1px #4dd0e1;
   }
+

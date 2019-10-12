@@ -23,15 +23,26 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 </head>
+<style>
+    .home_wrapper {
+        width: 330px;
+        margin: 0 auto;
+    }
+
+    .home_right {
+        position:relative;
+        left: 250px;
+    }
+</style>
 
 <body>
 
   <br>
-  <div class="flexbox center wrapper">
-    <h3><span style="color:#01A9DB">공시지원금 변동현황</span></h3>
-  </div>
-
-<br>
+            <div class="flexbox center">
+            <h3 style="color:#01A9DB;">공시지원금 변동현황</h3>
+            <a class="btn btn-outline-success home_right" href="#">home</a>
+            </div>
+  <br>
 
 <?php
    date_default_timezone_set('Asia/Seoul');

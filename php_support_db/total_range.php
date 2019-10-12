@@ -33,27 +33,69 @@ if(isset($_POST["date"])){
 
         $result .='
             <div class="flexbox wrapper center">
-            <p class="btn btn-outline-danger">공시지원금 변동 총'.$total_today_data_sum.'건</p>
-            </div>
-        <br>';
+            <p class="btn btn-outline-danger">공시지원금 변동 총 '.$total_today_data_sum.'건</p>
+            </div>';
 
         $result .='
         <div class="flexbox wrapper center">
-            <button id="move_skt_world" class="btn btn-outline-info button_size">SKT </br>'.$today_data_list[0].' 건</button>
-            <button id="move_kt_shop" class="btn btn-outline-info button_size">KT </br>'.$today_data_list[1].' 건</button>
-            <button id="move_lg_u_plus" class="btn btn-outline-info button_size">LG U+ </br>'.$today_data_list[2].'건</button>
-        </div>
         ';
 
+        if($today_data_list[0] > 0){
+            $result.='<button id="move_sk7" class="btn btn-outline-danger button_size">SKT </br>'.$today_data_list[0].'건</button>';
+        }else {
+            $result.='<button id="move_sk7" class="btn btn-outline-info button_size">SKT </br>'.$today_data_list[0].'건</button>';
+        }
+
+        if($today_data_list[1] > 0){
+            $result.='<button id="move_sk7" class="btn btn-outline-danger button_size">KT </br>'.$today_data_list[1].'건</button>';
+        }else {
+            $result.='<button id="move_sk7" class="btn btn-outline-info button_size">KT </br>'.$today_data_list[1].'건</button>';
+        }
+
+        if($today_data_list[2] > 0){
+            $result.='<button id="move_sk7" class="btn btn-outline-danger button_size">LG U+ </br>'.$today_data_list[2].'건</button>';
+        }else {
+            $result.='<button id="move_sk7" class="btn btn-outline-info button_size">LG U+ </br>'.$today_data_list[2].'건</button>';
+        }
+        $result.='   
+        </div>';
         $result.='
-        <div class="flexbox wrapper">
-            <button id="move_lg_mobile" class="btn btn-outline-info button_size">U+알뜰모바일 </br>'.$today_data_list[3].'건</button>
-            <button id="move_sk7" class="btn btn-outline-info button_size">SK 7모바일 </br>'.$today_data_list[4].'건</button>
-            <button id="move_kt_m_mobile" class="btn btn-outline-info button_size">KT M모바일 </br>'.$today_data_list[5].'건</button>
-            <button id="move_hello_mobile_skt" class="btn btn-outline-info button_size">헬로모바일(SKT) </br>'.$today_data_list[6].'건</button>
-            <button id="move_hello_mobile_kt" class="btn btn-outline-info button_size">헬로모바일(KT) </br>'.$today_data_list[7].' 건</button>
-        </div>
-        ';
+            <div class="flexbox wrapper">
+            ';
+
+            if($today_data_list[3] > 0){
+                $result.='<button id="move_sk7" class="btn btn-outline-danger button_size">U+알뜰모바일 </br>'.$today_data_list[3].'건</button>';
+            }else {
+                $result.='<button id="move_sk7" class="btn btn-outline-info button_size">U+알뜰모바일 </br>'.$today_data_list[3].'건</button>';
+            }
+
+            if($today_data_list[4] > 0){
+                $result.='<button id="move_sk7" class="btn btn-outline-danger button_size">SK 7모바일 </br>'.$today_data_list[4].'건</button>';
+            }else {
+                $result.='<button id="move_sk7" class="btn btn-outline-info button_size">SK 7모바일 </br>'.$today_data_list[4].'건</button>';
+            }
+
+            if($today_data_list[5] > 0){
+                $result.='<button id="move_sk7" class="btn btn-outline-danger button_size">KT M모바일 </br>'.$today_data_list[5].'건</button>';
+            }else {
+                $result.='<button id="move_sk7" class="btn btn-outline-info button_size">KT M모바일 </br>'.$today_data_list[5].'건</button>';
+            }
+
+            if($today_data_list[6] > 0){
+                $result.='<button id="move_hello_mobile_skt" class="btn btn-outline-danger button_size">헬로모바일(SKT) </br>'.$today_data_list[6].'건</button>';
+            }else {
+                $result.='<button id="move_hello_mobile_skt" class="btn btn-outline-info button_size">헬로모바일(SKT) </br>'.$today_data_list[6].'건</button>';
+            }
+
+            if($today_data_list[7] > 0){
+                $result.='<button id="move_hello_mobile_kt" class="btn btn-outline-danger button_size">헬로모바일(KT) </br>'.$today_data_list[7].'건</button>';
+            }else {
+                $result.='<button id="move_hello_mobile_kt" class="btn btn-outline-info button_size">헬로모바일(KT) </br>'.$today_data_list[7].'건</button>';
+            }
+
+           
+         $result.='   
+            </div>';
 	echo $result;
 }
 ?>
