@@ -42,7 +42,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 <br>
           <div class="flexbox center">
           <h3 style="color:#01A9DB;">공시지원금 변동현황</h3>
-          <a class="btn btn-outline-success home_right" href="#">home</a>
+          <a class="btn btn-outline-success home_right" href="../total.php">home</a>
           </div>
 <br>
 

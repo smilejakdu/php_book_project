@@ -40,7 +40,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
   <br>
             <div class="flexbox center">
             <h3 style="color:#01A9DB;">공시지원금 변동현황</h3>
-            <a class="btn btn-outline-success home_right" href="#">home</a>
+            <a class="btn btn-outline-success home_right" href="../total.php">home</a>
             </div>
   <br>
 
@@ -333,6 +333,11 @@ $(document).on("click","#change_name",function() {
 <div class="flexbox wrapper">
     <a href="../lg_mobile/lg_mobile.php"><button type="submit" class="button2">U+알뜰모바일</button></a>
     <a href="../sk7/sk7.php"><button type="submit" class="button">SK 7모바일</button></a>
+    <script>
+    // sk7 에서 어떠한 버튼을 클릭했을때 
+    // 해당하는 date 데이터 값을 담아서 보내야한다
+    
+    </script>
     <a href="../kt_m_mobile/kt_m_mobile.php"><button type="submit" class="button2">KT M모바일</button></a>
     <a href="../hello_mobile_skt/hello_mobile_skt.php"><button type="submit" class="button2">헬로모바일(SKT)</button></a>
     <a href="../hello_mobile_kt/hello_mobile_kt.php"><button type="submit" class="button2">헬로모바일(KT)</button></a>
