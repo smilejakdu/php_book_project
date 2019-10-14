@@ -318,32 +318,162 @@ $(document).on("click","#change_name",function() {
 <br>
 <br>
 <div class="flexbox wrapper center">
-
-    <a href="../skt/skt_world.php"><button type="submit" class="button2">SKT</button></a>
-
-    <a href="../kt/kt_shop.php">
-        <button type="submit" class="button2">KT</button>
-    </a>
-
-    <a href="../lg_u_plus/lg_u_plus.php">
-        <button type="submit" class="button2">LG U+</button>
-    </a>
-
+    <button type="submit" id="skt_world" class="button2">SKT</button>
+    <button type="submit" id="kt_shop" class="button2">KT</button>
+    <button type="submit" id="lg_u_plus" class="button2">LG U+</button>
 </div>
+
 <div class="flexbox wrapper">
-    <a href="../lg_mobile/lg_mobile.php"><button type="submit" class="button2">U+알뜰모바일</button></a>
-    <a href="../sk7/sk7.php"><button type="submit" class="button">SK 7모바일</button></a>
-    <script>
-    // sk7 에서 어떠한 버튼을 클릭했을때 
-    // 해당하는 date 데이터 값을 담아서 보내야한다
-    
-    </script>
-    <a href="../kt_m_mobile/kt_m_mobile.php"><button type="submit" class="button2">KT M모바일</button></a>
-    <a href="../hello_mobile_skt/hello_mobile_skt.php"><button type="submit" class="button2">헬로모바일(SKT)</button></a>
-    <a href="../hello_mobile_kt/hello_mobile_kt.php"><button type="submit" class="button2">헬로모바일(KT)</button></a>
+    <button type="submit" id="lg_mobile" class="button2">U+알뜰모바일</button>
+    <button type="submit" id="sk7" class="button">SK 7모바일</button>
+    <button type="submit" id="kt_m_mobile" class="button2">KT M모바일</button>
+    <button type="submit" id="hello_mobile_skt" class="button2">헬로모바일(SKT)</button>
+    <button type="submit" id="hello_mobile_kt" class="button2">헬로모바일(KT)</button>
 </div>
-<br>
+<script>
 
+     function formCreate(nm,mt,at,tg) {
+                    var f = document.createElement("form");
+                    f.name = nm;
+                    f.method = mt;
+                    f.action = at;
+                    f.target = tg ? tg : "_self";
+                    return f;
+                    } 
+                    
+                    /* 폼: 인풋 생성 */
+                    function formInput(f,n,v) {
+                    var i = document.createElement("input");
+                    i.type = "hidden";
+                    i.name = n;
+                    i.value = v;
+                    //f.appendChild(i);
+                    f.insertBefore(i, null);
+                    //f.insertBefore(i);
+                    return f;
+                    }
+                    
+                    /* 폼: 전송 */
+                    function formSubmit(f) {
+                    document.body.appendChild(f);
+                    f.submit();
+                    } 
+
+                    $(document).on("click","#skt_world",function() {
+
+                        var date = $('#date').val();
+                        go_skt_world(date);
+
+                        function go_skt_world(date) {
+                        var frm = formCreate('date_form','post','../skt/skt_world.php','');
+                        // form 이름 , 포스트방식과 겟방식 , 이동하고자 하는 페이지
+                        frm = formInput(frm, 'date', date);
+                        // category_name 이란 이름으로 받아온 값을 date 에 담아줘야한다.
+                        formSubmit(frm);	
+                        }
+                    });
+
+                    $(document).on("click","#kt_shop",function() {
+
+                        var date = $('#date').val();
+                        go_skt_world(date);
+
+                        function go_skt_world(date) {
+                        var frm = formCreate('date_form','post','../kt/kt_shop.php','');
+                        // form 이름 , 포스트방식과 겟방식 , 이동하고자 하는 페이지
+                        frm = formInput(frm, 'date', date);
+                        // category_name 이란 이름으로 받아온 값을 date 에 담아줘야한다.
+                        formSubmit(frm);	
+                        }
+                    });
+
+
+                    $(document).on("click","#lg_u_plus",function() {
+
+                        var date = $('#date').val();
+                        go_skt_world(date);
+
+                        function go_skt_world(date) {
+                        var frm = formCreate('date_form','post','../lg_u_plus/lg_u_plus.php','');
+                        // form 이름 , 포스트방식과 겟방식 , 이동하고자 하는 페이지
+                        frm = formInput(frm, 'date', date);
+                        // category_name 이란 이름으로 받아온 값을 date 에 담아줘야한다.
+                        formSubmit(frm);	
+                        }
+                    });
+
+                    $(document).on("click","#lg_mobile",function() {
+
+                        var date = $('#date').val();
+                        go_skt_world(date);
+
+                        function go_skt_world(date) {
+                        var frm = formCreate('date_form','post','../lg_mobile/lg_mobile.php','');
+                        // form 이름 , 포스트방식과 겟방식 , 이동하고자 하는 페이지
+                        frm = formInput(frm, 'date', date);
+                        // category_name 이란 이름으로 받아온 값을 date 에 담아줘야한다.
+                        formSubmit(frm);	
+                        }
+                    });
+
+                     $(document).on("click","#sk7",function() {
+
+                        var date = $('#date').val();
+                        go_skt_world(date);
+
+                        function go_skt_world(date) {
+                        var frm = formCreate('date_form','post','../sk7/sk7.php','');
+                        // form 이름 , 포스트방식과 겟방식 , 이동하고자 하는 페이지
+                        frm = formInput(frm, 'date', date);
+                        // category_name 이란 이름으로 받아온 값을 date 에 담아줘야한다.
+                        formSubmit(frm);	
+                        }
+                    });
+
+                     $(document).on("click","#kt_m_mobile",function() {
+
+                        var date = $('#date').val();
+                        go_skt_world(date);
+
+                        function go_skt_world(date) {
+                        var frm = formCreate('date_form','post','../kt_m_mobile/kt_m_mobile.php','');
+                        // form 이름 , 포스트방식과 겟방식 , 이동하고자 하는 페이지
+                        frm = formInput(frm, 'date', date);
+                        // category_name 이란 이름으로 받아온 값을 date 에 담아줘야한다.
+                        formSubmit(frm);	
+                        }
+                    });
+
+                     $(document).on("click","#hello_mobile_skt",function() {
+
+                        var date = $('#date').val();
+                        go_skt_world(date);
+
+                        function go_skt_world(date) {
+                        var frm = formCreate('date_form','post','../hello_mobile_skt/hello_mobile_skt.php','');
+                        // form 이름 , 포스트방식과 겟방식 , 이동하고자 하는 페이지
+                        frm = formInput(frm, 'date', date);
+                        // category_name 이란 이름으로 받아온 값을 date 에 담아줘야한다.
+                        formSubmit(frm);	
+                        }
+                    });
+
+                     $(document).on("click","#hello_mobile_kt",function() {
+
+                        var date = $('#date').val();
+                        go_skt_world(date);
+
+                        function go_skt_world(date) {
+                        var frm = formCreate('date_form','post','../hello_mobile_kt/hello_mobile_kt.php','');
+                        // form 이름 , 포스트방식과 겟방식 , 이동하고자 하는 페이지
+                        frm = formInput(frm, 'date', date);
+                        // category_name 이란 이름으로 받아온 값을 date 에 담아줘야한다.
+                        formSubmit(frm);	
+                        }
+                    });
+    </script>
+
+<br>
 <hr width="800" class="flexbox wrapper"/>
 <center id="purchase_order">
 <br>

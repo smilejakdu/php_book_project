@@ -495,7 +495,7 @@ if($total_today_data_sum == 0){
      <?php
         if($today_data_list[1] >0){
             ?>
-        <button id="move_skt_world" class="btn btn-outline-danger button_size">KT<?php echo "</br> $today_data_list[1]" ?>건 </button>
+        <button id="move_kt_shop" class="btn btn-outline-danger button_size">KT<?php echo "</br> $today_data_list[1]" ?>건 </button>
         <?php
         }
         ?>
@@ -503,7 +503,7 @@ if($total_today_data_sum == 0){
 <?php
         if($today_data_list[2] >0){
             ?>
-        <button id="move_skt_world" class="btn btn-outline-danger button_size">LG U+<?php echo "</br> $today_data_list[2]" ?>건 </button>
+        <button id="move_lg_u_plus" class="btn btn-outline-danger button_size">LG U+<?php echo "</br> $today_data_list[2]" ?>건 </button>
         <?php
         }
         ?>
@@ -511,7 +511,7 @@ if($total_today_data_sum == 0){
 <?php
         if($today_data_list[3] >0){
             ?>
-        <button id="move_skt_world" class="btn btn-outline-danger button_size">U+알뜰모바일<?php echo "</br> $today_data_list[3]" ?>건 </button>
+        <button id="move_lg_mobile" class="btn btn-outline-danger button_size">U+알뜰모바일<?php echo "</br> $today_data_list[3]" ?>건 </button>
         <?php
         }
         ?>
@@ -519,7 +519,7 @@ if($total_today_data_sum == 0){
 <?php
         if($today_data_list[4] >0){
             ?>
-        <button id="move_skt_world" class="btn btn-outline-danger button_size">SK 7모바일<?php echo "</br> $today_data_list[4]" ?>건 </button>
+        <button id="move_sk7" class="btn btn-outline-danger button_size">SK 7모바일<?php echo "</br> $today_data_list[4]" ?>건 </button>
         <?php
         }
         ?>
@@ -527,7 +527,7 @@ if($total_today_data_sum == 0){
         <?php
         if($today_data_list[5] >0){
             ?>
-        <button id="move_skt_world" class="btn btn-outline-danger button_size">KT M모바일<?php echo "</br> $today_data_list[5]" ?>건 </button>
+        <button id="move_kt_m_mobile" class="btn btn-outline-danger button_size">KT M모바일<?php echo "</br> $today_data_list[5]" ?>건 </button>
         <?php
         }
         ?>
@@ -535,7 +535,7 @@ if($total_today_data_sum == 0){
 <?php
         if($today_data_list[6] >0){
             ?>
-        <button id="move_skt_world" class="btn btn-outline-danger button_size">헬로모바일(SKT)<?php echo "</br> $today_data_list[6]" ?>건 </button>
+        <button id="move_hello_mobile_skt" class="btn btn-outline-danger button_size">헬로모바일(SKT)<?php echo "</br> $today_data_list[6]" ?>건 </button>
         <?php
         }
         ?>
@@ -543,7 +543,7 @@ if($total_today_data_sum == 0){
 <?php
         if($today_data_list[7] >0){
             ?>
-        <button id="move_skt_world" class="btn btn-outline-danger button_size">헬로모바일(KT)<?php echo "</br> $today_data_list[7]" ?>건 </button>
+        <button id="move_hello_mobile_kt" class="btn btn-outline-danger button_size">헬로모바일(KT)<?php echo "</br> $today_data_list[7]" ?>건 </button>
         <?php
         }
         ?>
