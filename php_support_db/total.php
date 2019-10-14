@@ -47,6 +47,7 @@ ini_set("display_errors", 1);
             <button id="home_reload"class="btn btn-outline-success home_right">home</button>
             <script>
                 $('#home_reload').click(function() {
+                    //새로고침
                     location.reload();
                 });
             </script>
