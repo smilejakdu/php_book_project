@@ -1,0 +1,230 @@
+  .flexbox {
+    border-radius: 15px;
+    display: flex;
+  }
+
+  .flexbox2 {
+    border: 1px solid #2c3863;
+    background-color: #323f6b;
+    width: 100%;
+    border-radius: 15px;
+    padding: 6px;
+    margin-top: 7px;
+    color: #ffffff;
+  }
+  .center {
+    justify-content: center;
+  }
+
+  .home_wrapper {
+    width: 330px;
+    margin: 0 auto;
+  }  
+  
+  .wrapper {
+    width: 850px;
+    margin: 0 auto;
+  }
+
+  .item {
+    border: 1px solid #405ea3;
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 300px;
+    height: 30px;
+    margin: 20px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+  }
+
+  .item2 {
+    border: 1px solid #405ea3;
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 300px;
+    height: 30px;
+    margin: 20px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+  }
+
+  .item3 {
+    border: 1px solid #405ea3;
+    background-color: #4967ad;
+    color: #fff;
+    border-radius: 10px;
+    width: 70px;
+    margin: 10px;
+    height: 40px;
+  }
+
+  .button {
+    border: 1px solid #405ea3;
+    background-color: #4967ad;
+    width: 150px;
+    height: 30px;
+    margin: 10px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 3px 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .button_size{
+    margin:50px;
+    font-size:25px;
+  }
+
+  .search_button {
+    border: 1px solid #405ea3;
+    background-color: #ffffff;
+    width: 2000px;
+    height: 30px;
+    margin: 10px;
+    font-size: 16px;
+    color: #2471A3;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 3px 16px;
+    border-radius: 10px;
+    text-align: left;
+  }
+
+  .date_button {
+    border: 1px solid #405ea3;
+    background-color: #ffffff;
+    width: 150px;
+    height: 30px;
+    margin: 10px;
+    font-size: 16px;
+    color: #2471A3;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 3px 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .button2 {
+    border: 1px solid #1e83be;
+    background-color: #ffffff;
+    width: 150px;
+    height: 30px;
+    margin: 10px;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 3px 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .button3 {
+    border: 1px solid #1e83be;
+    background-color: #ffffff;
+    width: 150px;
+    height: 30px;
+    margin: 10px;
+    color: #000000;
+    font-weight: 500;
+    font-size: 11px;
+    padding: 3px 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .btn_group button {
+    border: 1px solid skyblue;
+    background-color: rgba(0, 0, 0, 0);
+    color: skyblue;
+    padding: 5px;
+  }
+
+  table,
+  th,
+  td,
+  tr {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0;
+    font-weight: normal;
+    word-wrap: break-word;
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    margin: 10px;
+  }
+
+  .btn_group button:hover {
+    color: white;
+    background-color: skyblue;
+  }
+
+  /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
+  .ui-datepicker-trigger {
+    cursor: pointer;
+  }
+
+  /*datepicer input 롤오버 시 손가락 모양 표시*/
+  .hasDatepicker {
+    cursor: pointer;
+  }
+
+  input::placeholder {
+    color: Black;
+  }
+
+  .ui-datepicker {
+    width: 17em;
+    padding: .2em .2em 0;
+    display: none;
+    background: #405ea3;
+  }
+
+  .ui-datepicker .ui-datepicker-title {
+    margin: 0 2.3em;
+    line-height: 1.8em;
+    text-align: center;
+    color: #FFFFFF;
+    background: #405ea3;
+  }
+
+  .ui-datepicker table {
+    width: 100%;
+    font-size: .7em;
+    border-collapse: collapse;
+    font-family: verdana;
+    margin: 0 0 .4em;
+    color: #000000;
+    background: #FDF8E4;
+  }
+
+  .ui-datepicker td {
+    border: 0;
+    padding: 1px;
+  }
+
+  .ui-datepicker td span,
+  .ui-datepicker td a {
+    display: block;
+    padding: .8em;
+    text-align: right;
+    text-decoration: none;
+  }
+  
+  .active-cyan-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid #4dd0e1;
+    box-shadow: 0 0 0 1px #4dd0e1;
+
+  }
+
+  .active-cyan-3 input[type=text] {
+    border: 1px solid #4dd0e1;
+    box-shadow: 0 0 0 1px #4dd0e1;
+  }
+
