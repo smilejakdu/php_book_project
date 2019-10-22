@@ -5,7 +5,9 @@
 	require(__ROOT__."/lib/utill.php");
 
 	session_start();
-	error_reporting(); //오픈직전에 풀어줄것
+
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
 
 	//사용자 URL 추출 작업 . http , https분기
 	$base_URL = ($_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://';

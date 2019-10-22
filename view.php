@@ -147,8 +147,7 @@ $user = mysqli_fetch_assoc($board_user);
 
             <?php //} else {
             $count2 = 0;
-            $result = mysqli_fetch_assoc();
-            while ($row_comment = $result->fetch_assoc()) {
+            while ($row_comment = mysqli_fetch_assoc($result)) {
                 $datetime = explode(' ', $row_comment['date']);
                 $date = $datetime[0];
                 $time = $datetime[1];

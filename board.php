@@ -202,7 +202,7 @@ if (empty($allPost)) {
                         if (isset($emptyData)) {
                             echo $emptyData;
                         } else {
-                            while ($row = $result->fetch_assoc()) {
+                            while ($row = mysqli_fetch_assoc($result)) {
                                 $datetime = explode(' ', $row['date']);
                                 $date = $datetime[0];
                                 $time = $datetime[1];
