@@ -37,7 +37,7 @@ $conn = dbconn();
 <br>
 <div class="flexbox center">
     <h3 style="color:#01A9DB;">공시지원금 변동현황 asdfafa</h3>
-    <a class="btn btn-outline-success home_right" href="../total.php">home</a>
+    <a class="btn btn-outline-info home_right" href="../total.php">home</a>
 </div>
 <br>
 
@@ -526,48 +526,58 @@ if (isset($_POST["date"])) {
     }
     ?>
 
-    <div class="flexbox wrapper">
-        <div class="button">단말기 명</div>
-        <div class="button">모델 명</div>
-        <div class="button">요금제</div>
-        <div class="button">출고가</div>
-        <div class="button">공시지원금</div>
-        <div class="button">공시일자</div>
+    <div class="container">
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>
+                        <button class="button_list">단말기 명</button>
+                    </th>
+                    <th>
+                        <button class="button_list"> 모델 명</button>
+                    </th>
+                    <th>
+                        <button class="button_list">요금제</button>
+                    </th>
+                    <th>
+                        <button class="button_list"> 출고가</button>
+                    </th>
+                    <th>
+                        <button class="button_list"> 공시지원금</button>
+                    </th>
+                    <th>
+                        <button class="button_list"> 공시일자</button>
+                    </th>
+                </tr>
+
+                <?php
+                $query = "SELECT * FROM u_plus_shop WHERE support_date='$today' ORDER BY machine_name , model_name , plan_money";
+                $sql = mysqli_query($conn, $query);
+                if (mysqli_num_rows($sql) > 0) {
+                    while ($row = mysqli_fetch_array($sql)) {
+                        ?>
+                        <tr class="table table bordered">
+                            <td><?php echo $row['machine_name']; ?></td>
+                            <td><?php echo $row['model_name']; ?></td>
+                            <td><?php echo $row['plan_money']; ?></td>
+                            <td><?php echo $row['shipment_money']; ?></td>
+                            <td><?php echo $row['disclosure_money']; ?></td>
+                            <td><?php echo $row['support_date']; ?></td>
+                        </tr>
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <tr>
+                        <td colspan="5">아이템이 없습니다.</td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </table>
+        </div>
     </div>
-
-    <?php
-    $query = "SELECT * FROM u_plus_shop WHERE support_date='$today' ORDER BY machine_name , model_name , plan_money";
-    $sql = mysqli_query($conn, $query);
-    if (mysqli_num_rows($sql) > 0){
-    while ($row = mysqli_fetch_array($sql)){
-    ?>
-    <table>
-        <tr class="flexbox wrapper">
-            <td><?php echo $row['machine_name']; ?></td>
-            <td><?php echo $row['model_name']; ?></td>
-            <td><?php echo $row['plan_money']; ?></td>
-            <td><?php echo $row['shipment_money']; ?></td>
-            <td><?php echo $row['disclosure_money']; ?></td>
-            <td><?php echo $row['support_date']; ?></td>
-        </tr>
-        </br>
-        </br>
-        <hr width="800" class="flexbox wrapper"/>
-
-        <?php
-        }
-        } else {
-            ?>
-
-            <tr>
-                <td colspan="5">아이템이 없습니다.</td>
-            </tr>
-            <?php
-        }
-        ?>
-    </table>
 </center>
-<br>
 </body>
 
 </html>

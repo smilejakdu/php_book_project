@@ -42,7 +42,7 @@ ini_set("display_errors", 1);
 
 <div class="flexbox center">
     <h3 style="color:#01A9DB;">공시지원금 변동현황</h3>
-    <button id="home_reload" class="btn btn-outline-success home_right">home</button>
+    <button id="home_reload" class="btn btn-outline-info home_right">home</button>
     <script>
         $('#home_reload').click(function () {
             //새로고침

@@ -47,42 +47,53 @@ if(isset( $_POST["changed_machine_name"] , $_POST["date"]  )){
 			}
 		}
 
-        $result .='
-        <div class="flexbox wrapper">
-            <div class="button">단말기 명</div>
-            <div class="button">모델 명</div>
-            <div class="button">요금제</div>
-            <div class="button">출고가</div>
-            <div class="button">공시지원금</div>
-            <div class="button">공시일자</div>
-		</div>';
+	$result .= '
+       <div class="container">
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>
+                        <button class="button_list">단말기 명</button>
+                    </th>
+                    <th>
+                        <button class="button_list"> 모델 명</button>
+                    </th>
+                    <th>
+                        <button class="button_list">요금제</button>
+                    </th>
+                    <th>
+                        <button class="button_list"> 출고가</button>
+                    </th>
+                    <th>
+                        <button class="button_list"> 공시지원금</button>
+                    </th>
+                    <th>
+                        <button class="button_list"> 공시일자</button>
+                    </th>
+                </tr>';
 
 		$query = "SELECT * FROM kt_shop WHERE machine_name ='".$_POST["changed_machine_name"]."' AND support_date = '".$_POST["date"]."'  ORDER BY machine_name , model_name , plan_money";
         $sql = mysqli_query($conn, $query);
         if(mysqli_num_rows($sql) > 0){
 		while($row = mysqli_fetch_array($sql)){
-			$result .='
-      <table>
-			<tr class="flexbox wrapper">
-  			<td>'.$row["machine_name"].'</td>
-  			<td>'.$row["model_name"].'</td>
-  			<td>'.$row["plan_money"].'</td>
-  			<td>'.$row["shipment_money"].'</td>
-            <td>'.$row["disclosure_money"].'</td>
-  			<td>'.$row["support_date"].'</td>
+			$result .= '
+			<tr class="table table bordered">
+                <td>' . $row["machine_name"] . '</td>
+                <td>' . $row["model_name"] . '</td>
+                <td>' . $row["plan_money"] . '</td>
+                <td>' . $row["shipment_money"] . '</td>
+                <td>' . $row["disclosure_money"] . '</td>
+                <td>' . $row["support_date"] . '</td>
 			</tr>
-      </br>
-      <hr width="800" class="flexbox wrapper"/>
       ';
 		}
-	}
-	else{
-		$result .='
+		} else {
+			$result .= '
 		<tr>
-		<td colspan="5">아이템이 없습니다.</td>
+		    <td colspan="5">아이템이 없습니다.</td>
 		</tr>';
-	}
-	$result .='</table>';
+		}
+	$result .= '</table>';
 	echo $result;
 }
 ?>

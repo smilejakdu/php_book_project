@@ -60,6 +60,21 @@
     height: 40px;
   }
 
+  .button_list {
+    border: 1px solid #405ea3;
+    background-color: #4967ad;
+    width: 130px;
+    height: 30px;
+    margin: 10px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 3px 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
   .button {
     border: 1px solid #405ea3;
     background-color: #4967ad;
@@ -74,6 +89,7 @@
     border-radius: 10px;
     text-align: center;
   }
+
   .button_size{
     margin:50px;
     font-size:25px;
