@@ -41,6 +41,8 @@
 	echo("<script>location.replace('../board.php');</script>"); 
 
 
+
+
 	#로그트래킹
 	#ip / 시간 / 접근 / 로그인 성공 실패 유무
 

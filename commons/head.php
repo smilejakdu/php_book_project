@@ -43,7 +43,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="">
-<title>게시판</title>
+<title>뉴보드</title>
 <!-- Bootstrap core CSS -->
 <link href="<?=$web_path?>/css/bootstrap.css" rel="stylesheet">
 
