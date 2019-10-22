@@ -164,9 +164,9 @@ $user = mysqli_fetch_assoc($board_user);
                         <span style="float: right;"><?php echo $row_comment['date'] ?> <!-- 날짜 부분 -->
                             <?php if ($row_comment['id'] == $_SESSION['user_name'] || $_SESSION['gm'] == '2') { ?> <!--자신이 작성한 글이거나 권한 레벨이 2라면 삭제 권한을 준다 -->
                                 / <a class="button_hover"
-                                     onclick="comment_model('<?= $count2 ?>', '<?= $row_comment['no'] ?>');">수정</a> / <a
-                                        onclick="comment_delete('<?= $row_comment['no'] ?>');">삭제</a> / <a
-                                        onclick="comment_model2('<?= $row_comment['no'] ?>');"> 대댓글</a>
+                                     onclick="comment_model('<?= $count2 ?>', '<?= $row_comment['no'] ?>');">수정f</a> / <a
+                                        onclick="comment_delete('<?= $row_comment['no'] ?>');">삭제f</a> / <a
+                                        onclick="comment_model2('<?= $row_comment['no'] ?>');"> 대댓글f</a>
                             <?php } else { ?>
                                 <a onclick="comment_model2('<?= $row_comment['no'] ?>');"> / 대댓글</a>
                             <?php } ?>

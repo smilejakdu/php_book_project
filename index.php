@@ -1,5 +1,5 @@
 <?php
-	error_reporting(0);
+
 	session_start();
 	
 	//파라미터에 ck 데이터가 같이 날라오면 표시해준다.
