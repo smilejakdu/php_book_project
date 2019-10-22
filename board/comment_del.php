@@ -28,8 +28,8 @@ $no = scriptExclusion($no);
 
 //게시글 조회 쿼리
 $sql = 'select * from comment where no = ' . $no;
-$textdata = $db->query($sql);
-$text = $textdata->fetch_assoc();
+$textdata = mysqli_query($db , $sql);
+$text = mysqli_fetch_assoc($textdata);
 
 
 
@@ -39,7 +39,6 @@ if ($text['id'] == $_SESSION['user_name'] || $_SESSION['gm'] == '2'){
 	$sql = $sql . " and id = '". $_SESSION['user_name'] . "' ";
 
 	$result = $db->query($sql);
-	//$row2 = $result->fetch_assoc();
 	$member = array("code" => "200", "retrun" => "true");
 }
 

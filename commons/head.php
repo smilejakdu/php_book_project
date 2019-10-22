@@ -5,7 +5,7 @@
 	require(__ROOT__."/lib/utill.php");
 
 	session_start();
-	error_reporting(0); //오픈직전에 풀어줄것
+	error_reporting(); //오픈직전에 풀어줄것
 
 	//사용자 URL 추출 작업 . http , https분기
 	$base_URL = ($_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://';
@@ -31,9 +31,9 @@
 
 	//유저 데이터 받아오기
 	$sql = "SELECT * FROM user where no = ".$_SESSION['id'];
-	$result = $db->query($sql);
-	$user_data = $result->fetch_assoc();
-	
+	$result = mysqli_query($db , $sql);
+    $user_data = mysqli_fetch_assoc($result);
+
 
 ?>
 <!doctype html>
@@ -43,7 +43,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="">
-<title>뉴보드</title>
+<title>게시판</title>
 <!-- Bootstrap core CSS -->
 <link href="<?=$web_path?>/css/bootstrap.css" rel="stylesheet">
 

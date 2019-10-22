@@ -28,8 +28,8 @@ $id = $_SESSION['user_name'];
 //게시글 조회 쿼리
 $sql = 'select * from board where no = ' . $no;
 $sql = $sql . " and del_yn = 'N'";
-$textdata = $db->query($sql);
-$text = $textdata->fetch_assoc();
+$textdata = mysqli_query($db , $sql);
+$text = mysqli_fetch_assoc($textdata);
 
 //사용자가 맞는지 조건 검사 시작
 if ($text['id'] == $_SESSION['user_name'] || $_SESSION['gm'] == '2'){}
