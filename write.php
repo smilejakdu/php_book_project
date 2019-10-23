@@ -3,9 +3,6 @@
 	include "commons/head.php";
 ?>
 	
-	
-	
-
 	<!-- 중간 콘텐츠 시작 -->
 
 	<form enctype='multipart/form-data' action='./board/write_insert.php' method='post' id="board_form">

@@ -6,6 +6,9 @@
 	// 허용할 이미지 하나의 최대 크기(MB)
 	$imgMaxSize = 20;
 
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+
 
 	if( !isset($_FILES['imgfile']['error']) ) {
 		echo json_encode( array(

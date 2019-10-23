@@ -62,7 +62,7 @@ if (empty($allPost)) {
     $emptyData = '<tr><td class="textCenter" colspan="5">글이 존재하지 않습니다.</td></tr>';
 } else {
 
-    $onePage = 15; // 한 페이지에 보여줄 게시글의 수.
+    $onePage = 10; // 한 페이지에 보여줄 게시글의 수.
     $allPage = ceil($allPost / $onePage); //전체 페이지의 수
 
     if ($page < 1 && $page > $allPage) {
@@ -75,7 +75,7 @@ if (empty($allPost)) {
         exit;
     }
 
-    $oneSection = 10; //한번에 보여줄 총 페이지 개수(1 ~ 10, 11 ~ 20 ...)
+    $oneSection = 5; //한번에 보여줄 총 페이지 개수(1 ~ 10, 11 ~ 20 ...)
     $currentSection = ceil($page / $oneSection); //현재 섹션
     $allSection = ceil($allPage / $oneSection); //전체 섹션의 수
 

@@ -186,8 +186,8 @@ $user = mysqli_fetch_assoc($board_user);
                             <span style="float: right;"><?php echo $row_comment['date'] ?>
                                 <?php if ($row_comment['id'] == $_SESSION['user_name'] || $_SESSION['gm'] == '2') { ?>
                                     /
-                                    <a onclick="comment_model('<?= $count2 ?>', '<?= $row_comment['no'] ?>');">수정</a> /
-                                    <a onclick="comment_delete('<?= $row_comment['no'] ?>');">삭제</a>
+                                    <a onclick="comment_model('<?= $count2 ?>', '<?= $row_comment['no'] ?>');">수정s</a> /
+                                    <a onclick="comment_delete('<?= $row_comment['no'] ?>');">삭제s</a>
                                 <?php } ?> <!--두번째 댑스에서는 대댓글 사용 금지-->
 						</span>
                         </div>
