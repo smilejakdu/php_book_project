@@ -86,16 +86,16 @@ $user = mysqli_fetch_assoc($board_user);
             $list_url = "./board.php";
         }
         ?>
-        <a href="<?= $list_url ?>" class="btn btn-primary" style="border-radius : 0.5em;">목록</a>
+        <a href="<?= $list_url ?>" class="btn btn-primary" style="border-radius : 0.5em;">list</a>
 
         <?php
         if ($text['id'] == $_SESSION['user_name'] || $_SESSION['gm'] == '2') { //관리자에서는 모두 삭제가 가능함.
             ?>
             <!-- 실제 글쓴이 & 관리자만 수정 삭제 표시 나오도록 구성 -->
-            <button type="button" class="btn btn-warning" style="border-radius : 0.5em;" onclick="formset();">수정
+            <button type="button" class="btn btn-warning" style="border-radius : 0.5em;" onclick="formset();">modify
             </button>
             <a class="btn btn-danger" style="border-radius : 0.5em;" href="#"
-               onclick="delete_list('<?= $text['no'] ?>');">삭제</a>
+               onclick="delete_list('<?= $text['no'] ?>');">delete</a>
             <?php
         }
         ?>
@@ -113,7 +113,7 @@ $user = mysqli_fetch_assoc($board_user);
     $allPost = $comment_cnt['cnt']; //전체 댓글수
 
     if (empty($allPost)) {
-        $emptyData = '댓글이 아직 등록되지 않았습니다.';
+        $emptyData = '댓글을 등록해 주세요.';
     } else {
         $emptyData = '<b>댓글놀이~~~~~~~~~</b>';
         $sql = "select * from comment where del_yn = 'n' ";
@@ -122,7 +122,7 @@ $user = mysqli_fetch_assoc($board_user);
     }
 
     ?>
-    <h5>댓글</h5>
+    <h5 style="text-align: center">do you want to wirte comment?</h5>
 
     <div class="card" style="margin-bottom: 30px; ">
         <div class="card-body">
@@ -139,10 +139,10 @@ $user = mysqli_fetch_assoc($board_user);
             //if(isset($emptyData)) {
             ?>
             <div class="alert alert-light comment" style="margin-top: 5px;" role="alert">
-                <b>[ 댓글돌이 ]</b>
+                <b>[ 댓글 ]</b>
             </div>
             <div>
-                <?= $emptyData; ?>
+                <p style="text-align: center;"><?= $emptyData; ?></p>
             </div>
 
             <?php //} else {
@@ -164,7 +164,8 @@ $user = mysqli_fetch_assoc($board_user);
                         <span style="float: right;"><?php echo $row_comment['date'] ?> <!-- 날짜 부분 -->
                             <?php if ($row_comment['id'] == $_SESSION['user_name'] || $_SESSION['gm'] == '2') { ?> <!--자신이 작성한 글이거나 권한 레벨이 2라면 삭제 권한을 준다 -->
                                 / <a class="button_hover"
-                                     onclick="comment_model('<?= $count2 ?>', '<?= $row_comment['no'] ?>');">수정f</a> / <a
+                                     onclick="comment_model('<?= $count2 ?>', '<?= $row_comment['no'] ?>');">수정f</a> /
+                                <a
                                         onclick="comment_delete('<?= $row_comment['no'] ?>');">삭제f</a> / <a
                                         onclick="comment_model2('<?= $row_comment['no'] ?>');"> 대댓글f</a>
                             <?php } else { ?>
