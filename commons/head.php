@@ -36,10 +36,9 @@ $sql = "SELECT * FROM user where no = " . $_SESSION['id'];
 $result = mysqli_query($db, $sql);
 $user_data = mysqli_fetch_assoc($result);
 
-
 ?>
 <!doctype html>
-<html lang="kr">
+<html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -53,6 +52,7 @@ $user_data = mysqli_fetch_assoc($result);
 
     <!--파비콘 추가-->
     <link rel="shortcut icon" href="<?= $web_path ?>/img/shield.ico">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- <link href="css/screen.css" rel="stylesheet"> -->
     <!-- Custom styles for this template -->
 
@@ -105,25 +105,62 @@ $user_data = mysqli_fetch_assoc($result);
     <!-- container / meta -->
 </head>
 
+<script>
+
+    function navi_open() {
+        document.getElementById("mySidebar").style.display = "block";
+    }
+
+    function navi_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+</script>
+<style>
+    .navigation_open {
+        border : 1px solid black;
+        padding : 20px;
+        background:black;
+        color:white;
+        border-radius:20px;
+    }
+    .navigation_open:active {
+    }
+
+</style>
+
 <body style="background-color: #f4f4f4;">
-<img src="../background_img.png" style="width: 100%; height:300px;">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-border-right bg-warning" style="display:none" id="mySidebar">
+    <button onclick="navi_close()" class="w3-bar-item w3-large">Close &times;</button>
+    <a href="../developer_study/php_mysql.php" class="w3-bar-item w3-button">php mysql 공부</a>
+    <a href="#" class="w3-bar-item w3-button">python 공부</a>
+    <a href="#" class="w3-bar-item w3-button">djanog 공부 </a>
+    <a href="#" class="w3-bar-item w3-button">android , react 공부</a>
+</div>
+
+<nav class="navbar navbar-expand-lg bg-warning" style="border-radius:30px;">
     <div class="container">
-        <a class="navbar-brand" href="board.php" style="font-family: 'Jeju Gothic', serif;">블랙보드</a>
+        <button class="navigation_open" onclick="navi_open()" style="transition:.4s;">☰</button>&nbsp;&nbsp;
+        <a class="navbar-brand" href="../main_page.php" style="font-family: 'Jeju Gothic', serif;">main page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarColor01">
+
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item <?php if ($title == "community") { ?>active <?php } ?>">
-                    <a class="nav-link jeju" href="<?= $web_path ?>/board.php">커뮤니티</a>
+                    <a class="nav-link jeju" href="<?= $web_path ?>/board.php">board</a>
                 </li>
             </ul>
-            <div class="form-inline my-2 my-lg-0" style="color:white;">
+
+            <div class="form-inline my-2 my-lg-0" style="color:black; font-weight:bold;">
                 <?= $user_data['username']; ?>님
-                <a class="nav-link jeju" style="color:white;" href="<?= $web_path ?>/logout.php">로그아웃</a>
+                <a class="nav-link jeju" style="color:black;" href="<?= $web_path ?>/logout.php">로그아웃</a>
             </div>
+
         </div>
     </div>
 </nav>

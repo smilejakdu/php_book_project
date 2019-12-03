@@ -8,7 +8,7 @@ if ($_GET['list'] == 1) {
 }
 include $_SERVER["DOCUMENT_ROOT"] . "/commons/head.php";
 
-$No = $_GET['no'];
+$No = $_GET['no'] ?? null;
 
 //조회수를 넣어줍니다.
 if (!empty($No) && empty($_COOKIE['board_' . $No])) {
@@ -86,7 +86,7 @@ $user = mysqli_fetch_assoc($board_user);
             $list_url = "./board.php";
         }
         ?>
-        <a href="<?= $list_url ?>" class="btn btn-primary" style="border-radius : 0.5em;">list</a>
+        <a href="<?= $list_url ?>" class="btn btn-dark" style="border-radius : 0.5em;">list</a>
 
         <?php
         if ($text['id'] == $_SESSION['user_name'] || $_SESSION['gm'] == '2') { //관리자에서는 모두 삭제가 가능함.
@@ -94,8 +94,9 @@ $user = mysqli_fetch_assoc($board_user);
             <!-- 실제 글쓴이 & 관리자만 수정 삭제 표시 나오도록 구성 -->
             <button type="button" class="btn btn-warning" style="border-radius : 0.5em;" onclick="formset();">modify
             </button>
+            <!--            onclick="delete_list('--><?//= $text['no'] ?><!--');"-->
             <a class="btn btn-danger" style="border-radius : 0.5em;" href="#"
-               onclick="delete_list('<?= $text['no'] ?>');">delete</a>
+               onclick="delete_confirm_reply()">delete</a>
             <?php
         }
         ?>
@@ -126,9 +127,9 @@ $user = mysqli_fetch_assoc($board_user);
 
     <div class="card" style="margin-bottom: 30px; ">
         <div class="card-body">
-            <textarea id="comment" style="height: 57px; width: 1000px; resize: none;"
+            <textarea id="comment" style="height: 57px; width: 1000px; resize: none; border-radius:0.5em;"
                       onkeydown="if(event.keyCode==13) comment_insert();"></textarea>
-            <button type="button" class="btn btn-primary"
+            <button type="button" class="btn btn-dark"
                     style="margin-left: 5px; border-radius: 0.5em; margin-top: -50px; width: 100px; height: 60px;"
                     onclick="comment_insert();">등록하기
             </button>
@@ -291,6 +292,21 @@ $user = mysqli_fetch_assoc($board_user);
     }
 
     //게시글 삭제
+    function delete_confirm_reply() {
+        //    정말로 삭제하시겠습니까 ??
+        //    예
+        //    아니요
+        //    onclick="delete_list('<?//= $text['no'] ?>//');">delete</a>
+        var txt;
+        var r = confirm("정말로 삭제하시겠습니까??");
+
+        if (r == true) {
+            delete_list('<?= $text['no'] ?>');
+        } else {
+            alert("취소 되었습니다.");
+        }
+    }
+
     function delete_list(no) {
         $.ajax({
             url: './board/write_del.php',
@@ -299,9 +315,9 @@ $user = mysqli_fetch_assoc($board_user);
             data: {'no': no}, //no 데이터만 태워서 del로 전달
             success: function (data) {
                 if (data.code == '200') {
-                    alert('정상적으로 삭제되었습니다.');
                     //location.reload();
                     location.replace('../board.php'); //삭제후 보드로 이동
+                    // alert('정상적으로 삭제되었습니다.');
 
                 } else {
                     alert('정상적으로 처리되지 못했습니다.');

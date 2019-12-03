@@ -15,68 +15,25 @@ if ($_SESSION['id'] > 0) {
 ?>
 
 <!doctype html>
-<html lang="kr">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-
-
-    <style>
-        body {
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #eee;
-        }
-
-        .form-signin {
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-        }
-
-        .form-signin .form-signin-heading,
-        .form-signin .checkbox {
-            margin-bottom: 10px;
-        }
-
-        .form-signin .checkbox {
-            font-weight: 400;
-        }
-
-        .form-signin .form-control {
-            position: relative;
-            box-sizing: border-box;
-            height: auto;
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        .form-signin .form-control:focus {
-            z-index: 2;
-        }
-
-        .form-signin input[type="email"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-
-        .form-signin input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-    </style>
-
     <link href="./css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/join.css">
 </head>
+<style>
+    body {
+        background-image:url('kakao.png');
+    }
+</style>
 <body>
 
 <div class="container">
 
     <form class="form-signin" name="member_form" action="./login/login_wh.php" method="post"
           enctype="multipart/form-data">
-        <h2 class="form-signin-heading">회원가입</h2>
+        <h2 class="form-signin-heading" style="text-align:center;">회원가입</h2>
         <label for="userid" class="sr-only">ID</label>
         ID<input type="text" name="userid" id="userid" class="form-control" required="required" placeholder="아이디"
                  autofocus>
@@ -101,9 +58,10 @@ if ($_SESSION['id'] > 0) {
             <?php if ($login_ck == "5") { ?> <a href="#" class="more" style="color: red; text-decoration: none;">(가입)
                 성별을 선택해주세요.</a><?php } ?>
         </div>
-
-        <button class="btn btn-lg btn-primary" type="submit">가입!</button>
-        <button onclick="move_index()" type="button" class="btn btn-lg btn-danger cancel">취소</button>
+        <center>
+            <button class="btn btn-primary" type="submit">가입</button>
+            <button onclick="move_index()" type="button" class="btn btn-danger cancel">취소</button>
+        </center>
         <script>
             function move_index() {
                 window.location.href = "../index.php"

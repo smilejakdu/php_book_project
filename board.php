@@ -53,8 +53,10 @@ if (isset($searchColumn) && isset($searchText)) {
 /* 검색 끝 */
 
 $sql = "select count(*) as cnt from board where category='자유게시판' and del_yn = 'N'" . $searchSql;
-$result = mysqli_query($db, $sql);
-$row = mysqli_fetch_assoc($result);
+//$result = mysqli_query($db, $sql);
+//$row = mysqli_fetch_assoc($result);
+$result = $db ->query($sql);
+$row = $result ->fetch_assoc();
 
 $allPost = $row['cnt']; //전체 게시글의 수
 
@@ -94,11 +96,16 @@ if (empty($allPost)) {
 
     //첫 페이지가 아니라면 처음 버튼을 생성
     if ($page != 1) {
-        $paging .= '<li class="page-item"><a class="page-link" href="./board.php?page=1' . $subString . '">&laquo;</a></li>';
+//        &laquo; 로 해서 << 로 표시해도 되지만 , 알아보기 쉽게 처음 으로 설정 
+        $paging .= '<li class="page-item"><a class="page-link" href="./board.php?page=1' . $subString . '">처음</a></li>';
+    } else if ($page == 1) {
+        $paging .= '<li class="page-item" style="color:#3a5bd8;"><a class="page-link">처음</a></li>';
     }
     //첫 섹션이 아니라면 이전 버튼을 생성
     if ($currentSection != 1) {
         $paging .= '<li class="page-item"><a class="page-link" href="./board.php?page=' . $prevPage . $subString . '">이전</a></li>';
+    } else if ($currentSection == 1) {
+        $paging .= '<li class="page-item" style="color: #3a5bd8;"><a class="page-link">이전</a></li>';
     }
 
     for ($i = $firstPage; $i <= $lastPage; $i++) {
@@ -112,11 +119,16 @@ if (empty($allPost)) {
     //마지막 섹션이 아니라면 다음 버튼을 생성
     if ($currentSection != $allSection) {
         $paging .= '<li class="page-item"><a class="page-link" href="./board.php?page=' . $nextPage . $subString . '">다음</a></li>';
+    } elseif ($currentSection == $allSection) {
+        $paging .= '<li class="page-item" style="color: #3a5bd8;"><a class="page-link">다음</a></li>';
     }
 
     //마지막 페이지가 아니라면 끝 버튼을 생성
     if ($page != $allPage) {
-        $paging .= '<li class="page-item"><a class="page-link" href="./board.php?page=' . $allPage . $subString . '">&raquo;</a></li>';
+//        &raquo;로 해도 되지만 끝이라고 알아볼수 있게 설정 
+        $paging .= '<li class="page-item"><a class="page-link" href="./board.php?page=' . $allPage . $subString . '">끝</a></li>';
+    } else if ($page == $allPage) {
+        $paging .= '<li class="page-item" style="color: #3a5bd8; "><a class="page-link">끝</a></li>';
     }
     $paging .= '</ul>';
 
@@ -169,7 +181,6 @@ if (empty($allPost)) {
 
 							</span>
                         </div>
-
                     </div>
                 </div>
             </form>
@@ -177,7 +188,7 @@ if (empty($allPost)) {
 
             <div class="card" style="margin-bottom: 10px;">
                 <div class="card-body">
-                    <h4>자유게시판</h4>
+                    <h4>게시판</h4>
                     <table class="table">
                         <colgroup>
                             <col width="10%">
@@ -202,7 +213,7 @@ if (empty($allPost)) {
                         if (isset($emptyData)) {
                             echo $emptyData;
                         } else {
-                            while ($row = mysqli_fetch_assoc($result)) {
+                            while ($row = $result ->fetch_assoc()) {
                                 $datetime = explode(' ', $row['date']);
                                 $date = $datetime[0];
                                 $time = $datetime[1];
@@ -242,5 +253,5 @@ if (empty($allPost)) {
 <!--중간 콘텐츠 끝-->
 
 <?php
-    include "./commons/footer.php";
+include "./commons/footer.php";
 ?>

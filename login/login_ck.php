@@ -38,7 +38,8 @@ $_SESSION['gm'] = $row['gm'];
 //세션고유키 (사용자 인식 용도로 사용함 - 주의)
 $_SESSION['id'] = $row['no'];
 
-echo("<script>location.replace('../board.php');</script>");
+//만약에 Login 버튼을 눌렀을때 login 이 됬다면 main_page.php 로 이동
+echo("<script>location.replace('../main_page.php');</script>");
 
 
 #로그트래킹
