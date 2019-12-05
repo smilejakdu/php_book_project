@@ -6,9 +6,6 @@ require(__ROOT__ . "/lib/utill.php");
 
 session_start();
 
-//    error_reporting(E_ALL);
-//    ini_set("display_errors", 1);
-
 //사용자 URL 추출 작업 . http , https분기
 $base_URL = ($_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://';
 $base_URL .= ($_SERVER['SERVER_PORT'] != '80') ? $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] : $_SERVER['HTTP_HOST'];
@@ -67,7 +64,6 @@ $user_data = mysqli_fetch_assoc($result);
             integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
             crossorigin="anonymous"></script>
 
-
     <style>
         @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
         @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
@@ -125,24 +121,57 @@ $user_data = mysqli_fetch_assoc($result);
     }
     .navigation_open:active {
     }
+    
+    .input {
+        font-size:16px;
+        width:300px;
+        padding:10px;
+        border:0px;
+        outline:none;
+        float:left;
+        margin:10px;
+    }
+    .search_button {
+        width:70px;
+        height:45px;;
+        border:0px;
+        outline:none;
+        float:left;
+        background:white;
+        color:black;
+        border-radius:10px;
+        margin:10px;
+        border:1px solid black;
+    }
+    .search_button:hover{
+      background:black;
+      color:white;
+    }
+
+    .navbar_style{
+        width:16%;
+    }
 
 </style>
 
 <body style="background-color: #f4f4f4;">
 
 <!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-border-right bg-warning" style="display:none" id="mySidebar">
-    <button onclick="navi_close()" class="w3-bar-item w3-large">Close &times;</button>
-    <a href="../developer_study/php_mysql.php" class="w3-bar-item w3-button">php mysql 공부</a>
-    <a href="#" class="w3-bar-item w3-button">python 공부</a>
-    <a href="#" class="w3-bar-item w3-button">djanog 공부 </a>
-    <a href="#" class="w3-bar-item w3-button">android , react 공부</a>
+<div class="w3-sidebar w3-bar-block w3-border-right bg-warning" style="display:none; width:16%;" id="mySidebar">
+    <button onclick="navi_close()" class="w3-bar-item w3-large bg-warning">Close &times;</button>
+    <a href="../php_mysql_study/index.php" class="w3-bar-item w3-large bg-warning">php mysql 공부</a>
+    <a href="../book/index.php" class="w3-bar-item w3-large bg-warning">베스트셀러</a>
+    <a class="w3-bar-item w3-large bg-warning" href="<?= $web_path ?>/board.php">board</a>
 </div>
 
 <nav class="navbar navbar-expand-lg bg-warning" style="border-radius:30px;">
     <div class="container">
         <button class="navigation_open" onclick="navi_open()" style="transition:.4s;">☰</button>&nbsp;&nbsp;
         <a class="navbar-brand" href="../main_page.php" style="font-family: 'Jeju Gothic', serif;">main page</a>
+        <form action="../main_page.php" method="post">
+            <input type="text" name="search_text" class="input" id="search_text" placeholder="도서 검색">
+            <input type="submit" class="search_button" value="검색">
+        </form>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -152,7 +181,6 @@ $user_data = mysqli_fetch_assoc($result);
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item <?php if ($title == "community") { ?>active <?php } ?>">
-                    <a class="nav-link jeju" href="<?= $web_path ?>/board.php">board</a>
                 </li>
             </ul>
 

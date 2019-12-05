@@ -1,0 +1,31 @@
+<footer>
+    <p>Copyright &copy; 2019 <a href="https://baejino.com">BaeJino.</a></p>
+</footer>
+<script type="text/javascript">
+    document.getElementById('default_focus').focus();
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    input_box = document.getElementById("input_box");
+    $(window).scroll(function () {
+        if ($(this).scrollTop() < 200) {
+            input_box.style.position="absolute";
+            input_box.style.top="70px";
+            $("#input_box").removeClass("slide_bottom");
+        } else {
+            input_box.style.position="fixed";
+            input_box.style.top="-10px";
+            $("#input_box").addClass("slide_bottom");
+        }
+    }); 
+}); 
+</script>
+<script type="text/javascript">
+var textarea = document.getElementById('source_code');
+var editor = CodeMirror.fromTextArea(textarea, {
+    lineNumbers: true,
+    lineWrapping: true,
+    theme: "dracula",
+    val: textarea.value
+});
+</script>

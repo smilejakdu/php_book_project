@@ -1,0 +1,35 @@
+<div id="input_box">
+    <form onsubmit="return false">
+        <input id="default_focus" autocomplete="off" type="text" name="memo" onkeydown="JavaScript:Enter_Check();">
+    </form>
+</div>
+<div class="info_box">
+    <button type="button">
+        <a href="../"><i class="fas fa-chevron-left"></i></a>
+    </button>
+</div>
+<div class="menu_box">
+    <button type="button">
+        <a href="#Menu"><i class="fas fa-bars"></i></a>
+    </button>
+    <div class="menu_modal" id="Menu">
+        <div>
+            <a class="close_btn" href="#"><i class="fas fa-times"></i></a>
+            <p><a href="#Source">소스코드 삽입</a></p>
+            <hr>
+            <p><a href="mailto:im@baejino.com">의견이 있으세요?</a></p>
+            <p><a href="https://baejino.com/assets/images/donate.png">커피한잔 사주세요!</a></p>
+        </div>
+    </div>
+    <div class="source_modal" id="Source">
+        <div>
+            <form onsubmit="return false">
+                <textarea id="source_code" name="source"></textarea>
+                <p>
+                    <button onclick="runWrite()"><i class="fas fa-check"></i></button>
+                    <a class="close_btn" href="#"><i class="fas fa-times"></i></a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

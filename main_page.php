@@ -1,13 +1,23 @@
 <?php
 include "lib/dbconfig.php";
 include "./commons/head.php";
+error_reporting(0);
+?>
+
+<?php
+if (isset($_POST['search_text'])) {
+  $search_data = $_POST['search_text'];
+} else {
+  $search_data = "php";
+}
 ?>
 <script>
-      $(document).on("click", "#click_url", function () {
+      $(document).on("click", "#title", function () {
             var click_book_name = $(this).text();
-              alert(click_book_name);
+              window.location.href="https://book.naver.com/search/search.nhn?sm=sta_hty.book&sug=&where=nexearch&query="+click_book_name;
         });
 </script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
 <style>
     body {
         padding-bottom: 40px;
@@ -53,35 +63,27 @@ include "./commons/head.php";
         border-top-right-radius: 0;
     }
 
-
-    input {
-        font-size:16px;
-        width:300px;
-        padding:10px;
-        border:0px;
-        outline:none;
-        float:left;
-        margin:10px;
-    }
-    .search_button {
-        width:70px;
-        height:45px;;
-        border:0px;
-        outline:none;
-        float:left;
-        background:white;
-        color:black;
-        border-radius:10px;
-        margin:10px;
-        border:1px solid black;
+    .table_css {
+      margin-top:30px;
+      width:80%;
+      text-align:center;
+      margin-left:auto;
+      margin-right:auto;
     }
 
 </style>
-<?php
+    <table class="table table-striped table-dark table_css" id="purchase_order">
+        <tr>
+                <th>순위</th>
+                <th style="text-align:center;">제목</th>
+                <th width=200>이미지</th>
+                <th>저자</th>
+        </tr>
+        <?php
   $client_id = "SFezXsTn6ehQdzFHwwp7"; //발급받은 client id & secret key
   $client_secret = "KzKrnNFNu_";
  
-  $encText = urlencode("php"); //검색할 Text를 url인코딩
+  $encText = urlencode($search_data); //검색할 Text를 url인코딩
  
   /*요청 변수(query, display, start, sort... 네이버 참고)
     json ver: https://openapi.naver.com/v1/search/book.json?...
@@ -127,37 +129,20 @@ include "./commons/head.php";
 //   echo "status code: ".$status_code."";
  
   curl_close ($ch);
-  if($status_code == 200) { //정상
-  }
-  
-  else {
-    echo "Error 내용: ".$response;
-  }
   ?>
+
 <?php
- $result = json_decode($response, true);
+ $result = json_decode($response, true); // $result 배열에 담게된다.
  ?>
-  <div>
-    <input type="text" placeholder="검색어 입력">
-    <button class="search_button">검색</button>
-  </div>
-        <table class="table table-striped table-dark">
-        <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th width=200>이미지</th>
-                <th>저자</th>
-        </tr>
 <?php
-        $count = 0;
+        $count = 1;
         while($count < 10){
-        $img_src = $result['items'][$count]['image'];
 ?>      
             <tr>
-                    <td><?php echo $count+1 ?></td>
-                    <td id="click_url"><?php echo $result['items'][$count]['title'];?></td>
-                    <td><img src="<?php echo $img_src?>"></td>
-                    <td><?php echo $result['items'][$count]['author'];?></td>
+                    <td style="font-weight:bold; font-size:15px;"><?php echo $count ?></td>
+                    <td id="title"><?php echo $result['items'][$count]['title'];?></td>
+                    <td id="image"><img src="<?php echo $result['items'][$count]['image'];?>"></td>
+                    <td id="author"><?php echo $result['items'][$count]['author'];?></td>
             </tr>
 
 <?php
