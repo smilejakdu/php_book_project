@@ -58,12 +58,12 @@ include "../commons/head.php";
         $author_url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=".$author;
         ?>
     <tr>
-        <td style="font-weight:bold;"><?= $row['num'];?></td>
-        <td><a href=<?= $row['url'];?> style="text-decoration:none;" class="a_style"><?= $row['title'];?></a></td>
-        <td><a href=<?= $author_url ?> style="text-decoration:none;" class="a_style"><?= $row['author'];?></a></td>
+        <td style="font-weight:bold; vertical-align:middle;"><?= $row['num'];?></td>
+        <td style="vertical-align:middle;"><a href=<?= $row['url'];?> style="text-decoration:none;" class="a_style"><?= $row['title'];?></a></td>
+        <td style="vertical-align:middle;"><a href=<?= $author_url; ?> style="text-decoration:none;" class="a_style"><?= $row['author'];?></a></td>
         <td><a href=<?= $row['url'];?>><img src=<?= $row['image'];?>></a></td>
-        <td><?= number_format($row['original_price']);?></td>
-        <td><?= number_format($row['sale_price']);?></td>
+        <td style="vertical-align:middle;"><?= number_format($row['original_price']);?></td>
+        <td style="vertical-align:middle;"><?= number_format($row['sale_price']);?></td>
     </tr>
         <?php
         }

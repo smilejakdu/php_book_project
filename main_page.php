@@ -11,12 +11,6 @@ if (isset($_POST['search_text'])) {
   $search_data = "php";
 }
 ?>
-<script>
-      $(document).on("click", "#title", function () {
-            var click_book_name = $(this).text();
-              window.location.href="https://book.naver.com/search/search.nhn?sm=sta_hty.book&sug=&where=nexearch&query="+click_book_name;
-        });
-</script>
     <script src="//code.jquery.com/jquery.min.js"></script>
 <style>
     body {
@@ -74,10 +68,10 @@ if (isset($_POST['search_text'])) {
 </style>
     <table class="table table-striped table-dark table_css" id="purchase_order">
         <tr>
-                <th>순위</th>
-                <th style="text-align:center;">제목</th>
-                <th width=200>이미지</th>
-                <th>저자</th>
+                <th width="10%">순위</th>
+                <th width="50%" style="text-align:center;">제목</th>
+                <th width="20%">이미지</th>
+                <th width="10%">저자</th>
         </tr>
         <?php
   $client_id = "SFezXsTn6ehQdzFHwwp7"; //발급받은 client id & secret key
@@ -137,18 +131,23 @@ if (isset($_POST['search_text'])) {
 <?php
         $count = 1;
         while($count < 10){
-?>      
+          $title = $result['items'][$count]['title'];
+          $image = $result['items'][$count]['image'];
+          $url="https://book.naver.com/search/search.nhn?sm=sta_hty.book&sug=&where=nexearch&query=".$title;
+          $author = $result['items'][$count]['author'];
+?>              
             <tr>
-                    <td style="font-weight:bold; font-size:15px;"><?php echo $count ?></td>
-                    <td id="title"><?php echo $result['items'][$count]['title'];?></td>
-                    <td id="image"><img src="<?php echo $result['items'][$count]['image'];?>"></td>
-                    <td id="author"><?php echo $result['items'][$count]['author'];?></td>
+                <td style="font-weight:bold; font-size:15px; vertical-align:middle;"><?= $count ?></td>
+                <td style="vertical-align:middle;"><a style="text-decoration:none;" href=<?=$url?>><?= $title; ?></a></td>
+                <td id="image"><img src="<?= $image;?>"></td>
+                <td style="vertical-align:middle;" id="author"><?= $author; ?></td>
             </tr>
 
 <?php
         $count++;
         }
 ?>
+
 </table>
 </body>
 

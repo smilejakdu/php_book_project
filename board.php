@@ -142,7 +142,6 @@ if (empty($allPost)) {
 }
 ?>
 
-
 <!-- 중간 콘텐츠 시작 -->
 <div class="container" style="padding-top:1em;">
     <div class="row">
@@ -223,13 +222,13 @@ if (empty($allPost)) {
                                     $row['date'] = $date;
                                 ?>
                                 <tr>
-                                    <td class="no"><?php echo $row['no'] ?></td>
-                                    <td class="no"><?php echo $row['teg'] ?></td>
+                                    <td class="no"><?=$row['no'] ?></td>
+                                    <td class="no"><?=$row['teg'] ?></td>
                                     <td class="title">
-                                        <a href="./view.php?list=2&no=<?php echo $row['no'] ?>"><?php echo $row['title'] ?></a>
+                                        <a href="./view.php?list=2&no=<?=$row['no'] ?>"><?=$row['title'] ?></a>
                                     </td>
-                                    <td class="author"><?php echo $row['id'] ?></td>
-                                    <td class="date"><?php echo $row['date'] ?></td>
+                                    <td class="author"><?=$row['id'] ?></td>
+                                    <td class="date"><?=$row['date'] ?></td>
                                 </tr>
                                 <?php
                             }
@@ -239,7 +238,7 @@ if (empty($allPost)) {
                         </tbody>
                     </table>
                     <hr>
-                    <?php echo $paging ?>
+                    <?=$paging ?>
                 </div>
             </div>
 
@@ -253,5 +252,5 @@ if (empty($allPost)) {
 <!--중간 콘텐츠 끝-->
 
 <?php
-include "./commons/footer.php";
+    include "./commons/footer.php";
 ?>

@@ -5,7 +5,6 @@
         height: 200px;
     }
 
-
     .nav li {
         display: inline-block;
         font-size: 20px;
