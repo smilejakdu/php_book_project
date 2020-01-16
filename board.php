@@ -53,8 +53,6 @@ if (isset($searchColumn) && isset($searchText)) {
 /* 검색 끝 */
 
 $sql = "select count(*) as cnt from board where category='자유게시판' and del_yn = 'N'" . $searchSql;
-//$result = mysqli_query($db, $sql);
-//$row = mysqli_fetch_assoc($result);
 $result = $db ->query($sql);
 $row = $result ->fetch_assoc();
 

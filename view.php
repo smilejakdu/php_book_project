@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0); // warning 없애기 위해 
 //list에서 넘어올때 게시판 코드도 같이 포함해서 전송함
 if ($_GET['list'] == 1) {
     $title = "notice";
@@ -22,7 +22,7 @@ if (!empty($No) && empty($_COOKIE['board_' . $No])) {
         </script>
         <?php
     } else {
-        setcookie('board_' . $No, TRUE, time() + (60 * 60 * 24), '/');
+        setcookie('board_' . $No, TRUE, time() + (60 * 60 * 24), '//');
     }
 }
 

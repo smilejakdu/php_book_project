@@ -159,7 +159,6 @@ $user_data = mysqli_fetch_assoc($result);
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-border-right bg-warning" style="display:none; width:16%;" id="mySidebar">
     <button onclick="navi_close()" class="w3-bar-item w3-large bg-warning">Close &times;</button>
-    <a href="../intro.php" class="w3-bar-item w3-large bg-warning">introduction</a>
     <a href="../php_mysql_study/index.php" class="w3-bar-item w3-large bg-warning">php mysql 공부</a>
     <a href="../book/index.php" class="w3-bar-item w3-large bg-warning">베스트셀러</a>
     <a class="w3-bar-item w3-large bg-warning" href="<?= $web_path ?>/board.php">board</a>
